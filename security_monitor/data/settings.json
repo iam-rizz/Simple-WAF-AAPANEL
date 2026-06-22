@@ -1,0 +1,18 @@
+{
+  "auto_ban": false,
+  "default_ban_seconds": 3600,
+  "dry_run": true,
+  "enabled": true,
+  "firewall_backend": "auto",
+  "log_paths": [
+    "/www/wwwlogs/*.log"
+  ],
+  "private_ip_whitelist": true,
+  "scan_limit_lines": 5000,
+  "waf_enabled": false,
+  "whitelist_ips": [
+    "127.0.0.1",
+    "::1"
+  ],
+  "whitelist_paths": []
+}

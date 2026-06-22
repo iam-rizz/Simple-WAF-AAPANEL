@@ -1,0 +1,156 @@
+[
+  {
+    "ban_seconds": 3600,
+    "category": "secrets",
+    "enabled": true,
+    "id": "dotfiles",
+    "name": "Dotfile and secret file probe",
+    "pattern": "(?i)(^|/)\\.(env|git|svn|hg|bzr|htaccess|htpasswd|npmrc|netrc|pypirc|DS_Store)(/|$|[.?])",
+    "severity": "high",
+    "threshold": 2,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 86400,
+    "category": "secrets",
+    "enabled": true,
+    "id": "cloud-secrets",
+    "name": "Cloud credential probe",
+    "pattern": "(?i)(\\.aws/(credentials|config)|\\.kube/(config|token)|terraform\\.tfstate|service-account.*\\.json|private.*\\.(pem|key)|fullchain\\.pem)",
+    "severity": "critical",
+    "threshold": 1,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 3600,
+    "category": "cms",
+    "enabled": true,
+    "id": "wp-sensitive",
+    "name": "WordPress sensitive path probe",
+    "pattern": "(?i)(wp-config\\.php|xmlrpc\\.php|wp-content/(backup|backups|debug\\.log)|wp-json/wp/v2/users|readme\\.html|license\\.txt)",
+    "severity": "medium",
+    "threshold": 5,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 3600,
+    "category": "scanner",
+    "enabled": true,
+    "id": "admin-panels",
+    "name": "Admin panel scanner",
+    "pattern": "(?i)(^|/)(phpmyadmin|phpMyAdmin|pma|myadmin|mysqladmin|adminer|administrator|adminpanel|admincp|manager/html|cpanel|whm)(/|$|[.?])",
+    "severity": "medium",
+    "threshold": 5,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 7200,
+    "category": "leak",
+    "enabled": true,
+    "id": "backup-files",
+    "name": "Backup or database dump probe",
+    "pattern": "(?i)(backup|dump|database|db|www|html|site|web|archive).*(\\.(sql|zip|tar|tar\\.gz|tgz|gz|rar|7z|bz2))($|[?])|\\.(bak|old|orig|save|backup|swp|swo|tmp)($|[?])",
+    "severity": "high",
+    "threshold": 2,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 7200,
+    "category": "leak",
+    "enabled": true,
+    "id": "config-files",
+    "name": "Config file probe",
+    "pattern": "(?i)(^|/)(config|configuration|settings|localconfig|database|db|appsettings|parameters|connection|dbconfig|bootstrap|constants|init|common)\\.(php|inc|json|ya?ml|xml|ini|cfg|properties|groovy)($|[?])|web\\.config",
+    "severity": "high",
+    "threshold": 2,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 86400,
+    "category": "lfi",
+    "enabled": true,
+    "id": "traversal-lfi",
+    "name": "Traversal or local file inclusion",
+    "pattern": "(?i)(\\.\\./|\\.\\.%2f|%2e%2e|%252e%252e|/etc/(passwd|shadow|hosts|fstab)|/proc/self/(environ|cmdline|fd)|php://|file://|expect://|data://)",
+    "severity": "critical",
+    "threshold": 1,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 86400,
+    "category": "rce",
+    "enabled": true,
+    "id": "webshell",
+    "name": "Webshell or upload probe",
+    "pattern": "(?i)(c99|r57|wso|b374k|indoxploit|phpspy|webshell|shell|cmd|exec|uploadshell|eval-stdin)\\.php|vendor/phpunit/.*/eval-stdin\\.php",
+    "severity": "critical",
+    "threshold": 1,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 86400,
+    "category": "rce",
+    "enabled": true,
+    "id": "rce-params",
+    "name": "RCE parameter probe",
+    "pattern": "(?i)([?&](cmd|exec|command|system|shell|passthru|proc_open|popen)=|base64_decode|eval\\(|assert\\(|Runtime\\.getRuntime|jndi:(ldap|rmi|dns))",
+    "severity": "critical",
+    "threshold": 1,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 7200,
+    "category": "sqli",
+    "enabled": true,
+    "id": "sqli",
+    "name": "SQL injection probe",
+    "pattern": "(?i)(union(\\+|%20|\\s)+select|information_schema|sleep\\s*\\(|benchmark\\s*\\(|or(\\+|%20|\\s)+1=1|waitfor(\\+|%20|\\s)+delay|extractvalue\\s*\\(|updatexml\\s*\\()",
+    "severity": "high",
+    "threshold": 2,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 7200,
+    "category": "xss",
+    "enabled": true,
+    "id": "xss",
+    "name": "XSS payload probe",
+    "pattern": "(?i)(<script|%3cscript|javascript:|onerror\\s*=|onload\\s*=|document\\.cookie|alert\\s*\\(|<svg|%3csvg|<iframe|%3ciframe)",
+    "severity": "high",
+    "threshold": 2,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 7200,
+    "category": "framework",
+    "enabled": true,
+    "id": "framework-debug",
+    "name": "Framework debug endpoint probe",
+    "pattern": "(?i)(_profiler|_wdt|_ignition|actuator/(env|heapdump|shutdown|loggers)|jolokia|__debug__|elmah\\.axd|WEB-INF|META-INF|app/etc/local\\.xml)",
+    "severity": "high",
+    "threshold": 2,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 1800,
+    "category": "api",
+    "enabled": true,
+    "id": "api-docs",
+    "name": "API documentation probe",
+    "pattern": "(?i)(swagger\\.json|swagger-ui|swagger-resources|api-docs|openapi\\.(json|ya?ml)|graphql|graphiql)",
+    "severity": "low",
+    "threshold": 20,
+    "window_seconds": 600
+  },
+  {
+    "ban_seconds": 3600,
+    "category": "scanner",
+    "enabled": true,
+    "id": "bad-bot",
+    "name": "Bad bot or generic scanner pattern",
+    "pattern": "(?i)(nikto|sqlmap|acunetix|nessus|nmap|masscan|zgrab|dirbuster|gobuster|wpscan|whatweb|python-requests|curl/|wget/)",
+    "severity": "medium",
+    "threshold": 10,
+    "window_seconds": 600
+  }
+]

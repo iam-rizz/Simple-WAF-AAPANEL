@@ -1,0 +1,33 @@
+<div class="bt-form security-monitor">
+  <div class="plugin-title">Security Monitor</div>
+  <div class="plugin-desc">Dry-run first. Auto-ban and WAF are off until enabled.</div>
+  <div class="btn-group" style="margin:10px 0">
+    <button class="btn btn-success btn-sm" onclick="smScan()">Scan Now</button>
+    <button class="btn btn-default btn-sm" onclick="smOverview()">Overview</button>
+    <button class="btn btn-default btn-sm" onclick="smEvents()">Events</button>
+    <button class="btn btn-default btn-sm" onclick="smRules()">Rules</button>
+    <button class="btn btn-default btn-sm" onclick="smBans()">Bans</button>
+    <button class="btn btn-default btn-sm" onclick="smSettings()">Settings</button>
+    <button class="btn btn-warning btn-sm" onclick="smWaf()">Generate WAF</button>
+  </div>
+  <div class="line" style="margin:10px 0"></div>
+  <pre id="sm-output" style="min-height:420px;white-space:pre-wrap">Loading...</pre>
+</div>
+<script>
+function smPost(fn, data, cb) {
+  $.post('/plugin?action=a&name=security_monitor&s=' + fn, data || {}, function(r) {
+    if (cb) cb(r)
+  })
+}
+function smShow(r) {
+  $('#sm-output').text(JSON.stringify(r, null, 2))
+}
+function smOverview() { smPost('get_overview', {}, smShow) }
+function smEvents() { smPost('get_events', {limit: 100}, smShow) }
+function smRules() { smPost('get_rules', {}, smShow) }
+function smBans() { smPost('get_bans', {}, smShow) }
+function smSettings() { smPost('get_settings', {}, smShow) }
+function smScan() { smPost('scan', {}, smShow) }
+function smWaf() { smPost('generate_waf', {}, smShow) }
+smOverview()
+</script>
