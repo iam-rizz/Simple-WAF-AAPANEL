@@ -1,70 +1,491 @@
+
 <style>
-.security-monitor{height:720px;max-height:720px;background:#f3f6fb;border:1px solid #dfe6f1;border-radius:4px;padding:0;color:#333;overflow:hidden}.sm-shell{height:100%;display:flex;flex-direction:column}.sm-header{height:74px;flex:0 0 74px;background:#fff;border-bottom:1px solid #e6ebf2;display:flex;align-items:center;justify-content:space-between;padding:0 18px}.sm-brand{display:flex;align-items:center;gap:12px}.sm-logo{width:38px;height:38px;border-radius:8px;background:#20a53a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700}.sm-title{font-size:18px;font-weight:700;color:#202b3c;line-height:22px}.sm-subtitle{font-size:12px;color:#7b8794;margin-top:2px}.sm-actions{display:flex;align-items:center;gap:8px}.sm-body{flex:1;min-height:0;display:flex}.sm-sidebar{width:185px;flex:0 0 185px;background:#fff;border-right:1px solid #e6ebf2;padding:12px 0}.sm-nav{height:38px;line-height:38px;padding:0 18px;cursor:pointer;border-left:3px solid transparent;color:#4b5563;font-size:13px}.sm-nav:hover{background:#f5f8fc;color:#20a53a}.sm-nav.active{background:#eefaf1;border-left-color:#20a53a;color:#20a53a;font-weight:700}.sm-main{flex:1;min-width:0;display:flex;flex-direction:column}.sm-toolbar{height:50px;flex:0 0 50px;background:#fff;border-bottom:1px solid #e6ebf2;display:flex;align-items:center;justify-content:space-between;padding:0 14px}.sm-toolbar-title{font-size:15px;font-weight:700;color:#202b3c}.sm-toolbar-desc{font-size:12px;color:#8a95a3;margin-left:8px;font-weight:400}.sm-content{flex:1;min-height:0;padding:14px;overflow:hidden}.sm-scroll{height:100%;overflow:auto}.sm-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.sm-card{background:#fff;border:1px solid #e6ebf2;border-radius:4px;padding:14px}.sm-card-label{font-size:12px;color:#7b8794}.sm-card-value{font-size:28px;font-weight:700;color:#202b3c;margin-top:6px}.sm-card-hint{font-size:12px;color:#99a3af;margin-top:4px}.sm-panel{background:#fff;border:1px solid #e6ebf2;border-radius:4px;overflow:hidden}.sm-panel+.sm-panel{margin-top:14px}.sm-panel-head{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid #e6ebf2;background:#fbfcfe}.sm-panel-title{font-weight:700;color:#202b3c}.sm-table-wrap{height:470px;overflow:auto}.sm-table{width:100%;border-collapse:collapse;table-layout:fixed}.sm-table th{position:sticky;top:0;background:#f7f9fc;color:#5f6b7a;font-size:12px;font-weight:700;text-align:left;padding:10px;border-bottom:1px solid #e6ebf2;z-index:1}.sm-table td{padding:10px;border-bottom:1px solid #eef2f7;vertical-align:top;font-size:12px;color:#344054}.sm-table tr:hover td{background:#fbfdff}.sm-badge{display:inline-block;border-radius:3px;padding:2px 7px;font-size:12px;line-height:18px}.sm-low{background:#e8f5ff;color:#1677b9}.sm-medium{background:#fff7e6;color:#b26a00}.sm-high{background:#fff1f0;color:#cf1322}.sm-critical{background:#cf1322;color:#fff}.sm-ok{background:#edf9f0;color:#208a36}.sm-muted{color:#8a95a3}.sm-code{font-family:Menlo,Consolas,monospace;background:#f7f9fc;border:1px solid #e6ebf2;border-radius:3px;padding:6px;word-break:break-all;max-height:70px;overflow:auto}.sm-empty{height:220px;display:flex;align-items:center;justify-content:center;color:#8a95a3}.sm-json{height:100%;overflow:auto;white-space:pre-wrap;background:#1f2937;color:#dbeafe;padding:12px;border-radius:4px;font-family:Menlo,Consolas,monospace}.sm-form{padding:14px;display:grid;grid-template-columns:180px 1fr;gap:12px 16px}.sm-form label{color:#5f6b7a;font-weight:700}.sm-status{display:flex;align-items:center;gap:8px}.sm-dot{width:8px;height:8px;border-radius:50%;background:#20a53a}.sm-risk-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}@media(max-width:1100px){.security-monitor{height:680px}.sm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sm-sidebar{width:150px;flex-basis:150px}}@media(max-width:760px){.sm-body{display:block;overflow:auto}.sm-sidebar{width:auto;border-right:0;border-bottom:1px solid #e6ebf2;display:flex;overflow:auto;padding:0}.sm-nav{white-space:nowrap;border-left:0;border-bottom:3px solid transparent}.sm-nav.active{border-bottom-color:#20a53a}.sm-main{height:560px}.sm-grid{grid-template-columns:1fr}.sm-header{height:auto;padding:12px;display:block}.sm-actions{margin-top:10px}}
-.security-monitor{height:760px;max-height:760px}.security-monitor .sm-table-wrap{height:510px}.security-monitor .sm-json{height:100%;min-height:650px}.layui-layer:has(.security-monitor){min-width:1100px}.bt-w-menu .security-monitor,.dark .security-monitor,.night .security-monitor,body[theme="dark"] .security-monitor,body.dark .security-monitor,html.dark .security-monitor{background:#121820;border-color:#303946;color:#d8dee9}.dark .sm-header,.dark .sm-sidebar,.dark .sm-toolbar,.dark .sm-card,.dark .sm-panel,.night .sm-header,.night .sm-sidebar,.night .sm-toolbar,.night .sm-card,.night .sm-panel,body[theme="dark"] .sm-header,body[theme="dark"] .sm-sidebar,body[theme="dark"] .sm-toolbar,body[theme="dark"] .sm-card,body[theme="dark"] .sm-panel{background:#252b33;border-color:#3a414a;color:#d8dee9}.dark .sm-title,.dark .sm-toolbar-title,.dark .sm-panel-title,.dark .sm-card-value,.night .sm-title,.night .sm-toolbar-title,.night .sm-panel-title,.night .sm-card-value,body[theme="dark"] .sm-title,body[theme="dark"] .sm-toolbar-title,body[theme="dark"] .sm-panel-title,body[theme="dark"] .sm-card-value{color:#f3f4f6}.dark .sm-subtitle,.dark .sm-muted,.dark .sm-card-label,.dark .sm-card-hint,.night .sm-subtitle,.night .sm-muted,.night .sm-card-label,.night .sm-card-hint,body[theme="dark"] .sm-subtitle,body[theme="dark"] .sm-muted,body[theme="dark"] .sm-card-label,body[theme="dark"] .sm-card-hint{color:#9ca3af}.dark .sm-nav,.night .sm-nav,body[theme="dark"] .sm-nav{color:#d1d5db}.dark .sm-nav:hover,.night .sm-nav:hover,body[theme="dark"] .sm-nav:hover{background:#2f3742}.dark .sm-nav.active,.night .sm-nav.active,body[theme="dark"] .sm-nav.active{background:#18361f;color:#42d466}.dark .sm-table th,.night .sm-table th,body[theme="dark"] .sm-table th{background:#2b323b;color:#d1d5db;border-color:#3a414a}.dark .sm-table td,.night .sm-table td,body[theme="dark"] .sm-table td{border-color:#343b44;color:#d8dee9}.dark .sm-table tr:hover td,.night .sm-table tr:hover td,body[theme="dark"] .sm-table tr:hover td{background:#29313a}.dark .sm-code,.night .sm-code,body[theme="dark"] .sm-code{background:#1f242b;border-color:#3a414a;color:#e5e7eb}.bt-w-menu .sm-header,.bt-w-menu .sm-sidebar,.bt-w-menu .sm-toolbar,.bt-w-menu .sm-card,.bt-w-menu .sm-panel,body.dark .sm-header,body.dark .sm-sidebar,body.dark .sm-toolbar,body.dark .sm-card,body.dark .sm-panel,html.dark .sm-header,html.dark .sm-sidebar,html.dark .sm-toolbar,html.dark .sm-card,html.dark .sm-panel{background:#1b222c;border-color:#303946;color:#d8dee9}.bt-w-menu .sm-table th,body.dark .sm-table th,html.dark .sm-table th{background:#202936;color:#d1d5db;border-color:#303946}.bt-w-menu .sm-table td,body.dark .sm-table td,html.dark .sm-table td{background:#1b222c;color:#d8dee9;border-color:#28313d}.bt-w-menu .sm-code,body.dark .sm-code,html.dark .sm-code{background:#111827;border-color:#303946;color:#e5e7eb}.bt-w-menu .sm-json,body.dark .sm-json,html.dark .sm-json{background:#0b1220;color:#dbeafe}
+:root{
+--w-bg:#f0f4f8;--w-sur:#fff;--w-sur2:#f7f9fc;--w-bdr:#e2e8f0;--w-bdr2:#cbd5e1;
+--w-tx:#0f172a;--w-tx2:#475569;--w-tx3:#94a3b8;
+--w-acc:#16a34a;--w-acc-bg:#dcfce7;--w-acc-tx:#15803d;
+--w-nav-a:#f0fdf4;--w-nav-ab:#16a34a;--w-nav-at:#15803d;--w-nav-h:#f1f5f9;
+--w-th:#f8fafc;--w-trh:#f8fafc;--w-code:#f1f5f9;--w-cbdr:#e2e8f0;
+--w-json:#0f172a;--w-json-tx:#bfdbfe;
+--bl-bg:#eff6ff;--bl-tx:#1d4ed8;
+--am-bg:#fffbeb;--am-tx:#b45309;
+--hi-bg:#fff1f2;--hi-tx:#be123c;
+--cr-bg:#7f1d1d;--cr-tx:#fecaca;
+--ok-bg:#f0fdf4;--ok-tx:#15803d;
+--ic-bl-bg:#eff6ff;--ic-bl-c:#2563eb;
+--ic-am-bg:#fffbeb;--ic-am-c:#d97706;
+--ic-re-bg:#fff1f2;--ic-re-c:#e11d48;
+--ic-gr-bg:#f1f5f9;--ic-gr-c:#475569;
+}
+@media(prefers-color-scheme:dark){:root{
+--w-bg:#0d1117;--w-sur:#161b22;--w-sur2:#1c2128;--w-bdr:#30363d;--w-bdr2:#484f58;
+--w-tx:#e6edf3;--w-tx2:#8b949e;--w-tx3:#656d76;
+--w-acc:#3fb950;--w-acc-bg:#1a2f1e;--w-acc-tx:#3fb950;
+--w-nav-a:#1a2f1e;--w-nav-ab:#3fb950;--w-nav-at:#3fb950;--w-nav-h:#21262d;
+--w-th:#1c2128;--w-trh:#21262d;--w-code:#161b22;--w-cbdr:#30363d;
+--w-json:#0d1117;--w-json-tx:#bfdbfe;
+--bl-bg:#1e3a5f;--bl-tx:#93c5fd;
+--am-bg:#431407;--am-tx:#fcd34d;
+--hi-bg:#3b0d14;--hi-tx:#fca5a5;
+--cr-bg:#7f1d1d;--cr-tx:#fecaca;
+--ok-bg:#14291b;--ok-tx:#4ade80;
+--ic-bl-bg:#1e3a5f;--ic-bl-c:#60a5fa;
+--ic-am-bg:#431407;--ic-am-c:#fcd34d;
+--ic-re-bg:#3b0d14;--ic-re-c:#f87171;
+--ic-gr-bg:#21262d;--ic-gr-c:#8b949e;
+}}
+*{box-sizing:border-box;margin:0;padding:0}
+.waf{height:780px;max-height:780px;background:var(--w-bg);border:1px solid var(--w-bdr);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px;color:var(--w-tx)}
+.waf-header{height:58px;flex:0 0 58px;background:var(--w-sur);border-bottom:1px solid var(--w-bdr);display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:10px}
+.waf-brand{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.waf-logo{width:34px;height:34px;border-radius:8px;background:var(--w-acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0}
+.waf-title{font-size:14px;font-weight:700;color:var(--w-tx);letter-spacing:-.2px}
+.waf-subtitle{font-size:11px;color:var(--w-tx3);margin-top:1px}
+.waf-btns{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.wb{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:6px;border:1px solid var(--w-bdr);background:var(--w-sur2);color:var(--w-tx2);font-size:12px;font-weight:500;cursor:pointer;transition:all .12s;white-space:nowrap;line-height:1}
+.wb:hover{background:var(--w-nav-h);border-color:var(--w-bdr2);color:var(--w-tx)}
+.wb.pri{background:var(--w-acc);border-color:var(--w-acc);color:#fff}
+.wb.pri:hover{opacity:.85}
+.wbicon{width:14px;height:14px;display:inline-block;vertical-align:middle;flex-shrink:0}
+.waf-body{flex:1;min-height:0;display:flex}
+.waf-sidebar{width:170px;flex:0 0 170px;background:var(--w-sur);border-right:1px solid var(--w-bdr);display:flex;flex-direction:column;padding:6px 0;gap:1px;overflow-y:auto}
+.wsec{padding:7px 13px 3px;font-size:10px;font-weight:700;color:var(--w-tx3);text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
+.wnav{display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;cursor:pointer;border-left:2.5px solid transparent;color:var(--w-tx2);font-size:12.5px;font-weight:500;transition:all .1s;user-select:none}
+.wnav:hover{background:var(--w-nav-h);color:var(--w-tx)}
+.wnav.active{background:var(--w-nav-a);border-left-color:var(--w-nav-ab);color:var(--w-nav-at)}
+.wnav svg{width:15px;height:15px;flex-shrink:0;opacity:.6}
+.wnav.active svg{opacity:1}
+.waf-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.waf-toolbar{height:46px;flex:0 0 46px;background:var(--w-sur);border-bottom:1px solid var(--w-bdr);display:flex;align-items:center;justify-content:space-between;padding:0 14px}
+.wtl{display:flex;align-items:baseline;gap:6px}
+.wt-title{font-size:13.5px;font-weight:700;color:var(--w-tx)}
+.wt-desc{font-size:11px;color:var(--w-tx3)}
+.wstatus{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--w-tx3)}
+.wdot{width:7px;height:7px;border-radius:50%;background:var(--w-acc);flex-shrink:0}
+.waf-content{flex:1;min-height:0;padding:11px;overflow:hidden;display:flex;flex-direction:column}
+.wscroll{flex:1;overflow-y:auto;overflow-x:hidden}
+.wscroll::-webkit-scrollbar{width:3px}
+.wscroll::-webkit-scrollbar-thumb{background:var(--w-bdr2);border-radius:2px}
+.waf-footer{flex:0 0 36px;border-top:1px solid var(--w-bdr);background:var(--w-sur);padding:0 14px;display:flex;align-items:center;justify-content:space-between}
+.wfl{display:flex;align-items:center;gap:14px}
+.wf-link{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--w-tx3);text-decoration:none;transition:color .12s}
+.wf-link:hover{color:var(--w-acc)}
+.wf-link svg{width:13px;height:13px}
+.wf-ver{font-size:11px;color:var(--w-tx3)}
+.wgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:10px}
+.wcard{background:var(--w-sur);border:1px solid var(--w-bdr);border-radius:8px;padding:13px 14px;transition:border-color .12s}
+.wcard:hover{border-color:var(--w-bdr2)}
+.wc-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;margin-bottom:9px;flex-shrink:0}
+.wc-icon svg{width:16px;height:16px}
+.ic-bl{background:var(--ic-bl-bg);color:var(--ic-bl-c)}
+.ic-am{background:var(--ic-am-bg);color:var(--ic-am-c)}
+.ic-re{background:var(--ic-re-bg);color:var(--ic-re-c)}
+.ic-gr{background:var(--ic-gr-bg);color:var(--ic-gr-c)}
+.wc-icon svg{stroke:currentColor}
+.wc-label{font-size:10.5px;color:var(--w-tx3);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.wc-val{font-size:26px;font-weight:700;color:var(--w-tx);margin-top:3px;letter-spacing:-.5px;line-height:1}
+.wc-hint{font-size:11px;color:var(--w-tx3);margin-top:4px}
+.wpanel{background:var(--w-sur);border:1px solid var(--w-bdr);border-radius:8px;overflow:hidden}
+.wpanel+.wpanel{margin-top:9px}
+.wph{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid var(--w-bdr);background:var(--w-sur);gap:8px;flex-shrink:0}
+.wph-l{display:flex;align-items:center;gap:8px}
+.wph-r{display:flex;align-items:center;gap:6px}
+.wpt{font-size:12.5px;font-weight:700;color:var(--w-tx);display:flex;align-items:center;gap:6px}
+.wpt svg{width:14px;height:14px;stroke:var(--w-tx3)}
+.wsearch{height:26px;padding:0 8px;border:1px solid var(--w-bdr);border-radius:5px;background:var(--w-sur2);color:var(--w-tx);font-size:11.5px;outline:none;width:155px;transition:border-color .12s}
+.wsearch::placeholder{color:var(--w-tx3)}
+.wsearch:focus{border-color:var(--w-acc)}
+.wsel{height:26px;padding:0 6px;border:1px solid var(--w-bdr);border-radius:5px;background:var(--w-sur2);color:var(--w-tx2);font-size:11.5px;outline:none;cursor:pointer}
+.wsel:focus{border-color:var(--w-acc)}
+.wtable-wrap{overflow-x:auto}
+.wtable{width:100%;border-collapse:collapse;table-layout:fixed}
+.wtable th{position:sticky;top:0;background:var(--w-th);color:var(--w-tx3);font-size:10.5px;font-weight:700;text-align:left;padding:8px 10px;border-bottom:1px solid var(--w-bdr);z-index:1;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+.wtable td{padding:9px 10px;border-bottom:1px solid var(--w-bdr);vertical-align:middle;font-size:12px;color:var(--w-tx);word-break:break-word}
+.wtable tr:last-child td{border-bottom:0}
+.wtable tr:hover td{background:var(--w-trh)}
+.wbadge{display:inline-flex;align-items:center;border-radius:4px;padding:2px 6px;font-size:11px;font-weight:600;line-height:16px;white-space:nowrap}
+.wlow{background:var(--bl-bg);color:var(--bl-tx)}
+.wmedium{background:var(--am-bg);color:var(--am-tx)}
+.whigh{background:var(--hi-bg);color:var(--hi-tx)}
+.wcritical{background:var(--cr-bg);color:var(--cr-tx)}
+.wok{background:var(--ok-bg);color:var(--ok-tx)}
+.wmuted{color:var(--w-tx3);font-size:11px;margin-top:2px;line-height:1.3}
+.wcode{font-family:Menlo,Consolas,monospace;background:var(--w-code);border:1px solid var(--w-cbdr);border-radius:4px;padding:4px 7px;word-break:break-all;max-height:52px;overflow:auto;font-size:11px;color:var(--w-tx2)}
+.wempty{padding:42px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--w-tx3)}
+.wempty svg{width:28px;height:28px;stroke:var(--w-tx3);opacity:.35}
+.wempty span{font-size:12px}
+.wjson{min-height:400px;white-space:pre-wrap;background:var(--w-json);color:var(--w-json-tx);padding:12px;border-radius:7px;font-family:Menlo,Consolas,monospace;font-size:11.5px;line-height:1.6;overflow:auto}
+.wform{padding:12px 14px;display:grid;grid-template-columns:180px 1fr;gap:11px 14px;align-items:start}
+.wfl-lbl{color:var(--w-tx2);font-weight:600;font-size:12px;padding-top:2px}
+.wfv{color:var(--w-tx);font-size:12px;padding-top:2px}
+.wrisk{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.wpager{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-top:1px solid var(--w-bdr);background:var(--w-sur);flex-shrink:0}
+.wpager-info{font-size:11px;color:var(--w-tx3)}
+.wpager-btns{display:flex;align-items:center;gap:3px}
+.wpb{min-width:26px;height:26px;padding:0 4px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--w-bdr);border-radius:5px;background:var(--w-sur2);color:var(--w-tx2);cursor:pointer;font-size:11.5px;font-weight:500;transition:all .1s;line-height:1}
+.wpb:hover:not([disabled]){background:var(--w-nav-h);border-color:var(--w-bdr2);color:var(--w-tx)}
+.wpb.cur{background:var(--w-acc);border-color:var(--w-acc);color:#fff;cursor:default}
+.wpb[disabled]{opacity:.3;cursor:not-allowed}
+.wpb svg{width:13px;height:13px;stroke:currentColor}
+.wsort{cursor:pointer;user-select:none}
+.wsort:hover{color:var(--w-tx)}
+.wsort.asc::after{content:' ↑';font-size:9px;opacity:.7}
+.wsort.desc::after{content:' ↓';font-size:9px;opacity:.7}
+.wdiv{width:1px;height:16px;background:var(--w-bdr);margin:0 2px}
 </style>
-<div class="bt-form security-monitor">
-  <div class="sm-shell">
-    <div class="sm-header">
-      <div class="sm-brand">
-        <div class="sm-logo">W</div>
-        <div>
-          <div class="sm-title">Simple WAF</div>
-          <div class="sm-subtitle">Security monitoring and IP blockade for aaPanel</div>
-        </div>
-      </div>
-      <div class="sm-actions">
-        <button class="btn btn-success btn-sm" onclick="smScan()">Scan Now</button>
-        <button class="btn btn-default btn-sm" onclick="smRefresh()">Refresh</button>
-        <button class="btn btn-warning btn-sm" onclick="smWaf()">Generate WAF</button>
-        <button class="btn btn-primary btn-sm" onclick="smExportReport()">Export Report</button>
+
+<div class="waf">
+  <div class="waf-header">
+    <div class="waf-brand">
+      <div class="waf-logo">W</div>
+      <div>
+        <div class="waf-title">Simple WAF</div>
+        <div class="waf-subtitle">Security monitoring · aaPanel</div>
       </div>
     </div>
-    <div class="sm-body">
-      <div class="sm-sidebar">
-        <div class="sm-nav active" data-tab="overview" onclick="smTab('overview')">Home</div>
-        <div class="sm-nav" data-tab="events" onclick="smTab('events')">Interception</div>
-        <div class="sm-nav" data-tab="rules" onclick="smTab('rules')">Rules</div>
-        <div class="sm-nav" data-tab="bans" onclick="smTab('bans')">Blockade</div>
-        <div class="sm-nav" data-tab="settings" onclick="smTab('settings')">Global</div>
-        <div class="sm-nav" data-tab="raw" onclick="smTab('raw')">Logs</div>
+    <div class="waf-btns">
+      <button class="wb" onclick="smScan()">
+        <svg class="wbicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 2A10 10 0 0 0 2 12"/><path d="M12 22a10 10 0 0 0 10-10"/><path d="M12 22A10 10 0 0 1 2 12"/><path d="m4.93 4.93 4.24 4.24"/></svg>Scan
+      </button>
+      <button class="wb" onclick="smRefresh()">
+        <svg class="wbicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>Refresh
+      </button>
+      <button class="wb" onclick="smWaf()">
+        <svg class="wbicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Generate WAF
+      </button>
+      <button class="wb pri" onclick="smExportReport()">
+        <svg class="wbicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export
+      </button>
+    </div>
+  </div>
+
+  <div class="waf-body">
+    <div class="waf-sidebar">
+      <div class="wsec">Monitor</div>
+      <div class="wnav active" data-tab="overview" onclick="smTab('overview')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Overview
       </div>
-      <div class="sm-main">
-        <div class="sm-toolbar">
-          <div><span class="sm-toolbar-title" id="sm-page-title">Home</span><span class="sm-toolbar-desc" id="sm-page-desc">Overview and running status</span></div>
-          <div class="sm-status"><span class="sm-dot"></span><span class="sm-muted">Dry-run safe mode</span></div>
+      <div class="wnav" data-tab="events" onclick="smTab('events')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Interception
+      </div>
+      <div class="wsec">Config</div>
+      <div class="wnav" data-tab="rules" onclick="smTab('rules')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Rules
+      </div>
+      <div class="wnav" data-tab="bans" onclick="smTab('bans')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>Blockade
+      </div>
+      <div class="wnav" data-tab="settings" onclick="smTab('settings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Global
+      </div>
+      <div class="wnav" data-tab="raw" onclick="smTab('raw')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>Logs
+      </div>
+    </div>
+
+    <div class="waf-main">
+      <div class="waf-toolbar">
+        <div class="wtl">
+          <span class="wt-title" id="sm-page-title">Overview</span>
+          <span class="wt-desc" id="sm-page-desc">Running status and summary</span>
         </div>
-        <div class="sm-content"><div id="sm-content" class="sm-scroll"></div></div>
+        <div class="wstatus"><span class="wdot"></span>Dry-run safe mode</div>
+      </div>
+      <div class="waf-content"><div id="sm-content" class="wscroll"></div></div>
+      <div class="waf-footer">
+        <div class="wfl">
+          <a class="wf-link" href="https://t.me/rizzid03" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 3-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 3"/><path d="M22 3H2l9 7.5L22 3z"/><path d="M2 3v13c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V3"/></svg>@Rizz
+          </a>
+          <a class="wf-link" href="https://github.com/iam-rizz/Simple-WAF-AAPANEL" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>iam-rizz / Simple-WAF-AAPANEL
+          </a>
+        </div>
+        <span class="wf-ver">Simple WAF v1.0</span>
       </div>
     </div>
   </div>
 </div>
+
 <script>
-var smState={tab:'overview',raw:null}
-var smTitles={overview:['Home','Overview and running status'],events:['Interception','Detected suspicious requests'],rules:['Rules','Detection rules and thresholds'],bans:['Blockade','Banned and dry-run IP records'],settings:['Global','Runtime configuration'],raw:['Logs','Operation result and JSON detail']}
-function smResizeLayer(){setTimeout(function(){var layer=$('.security-monitor').closest('.layui-layer');if(layer.length){layer.css({width:'1100px',height:'820px'});var win=$(window);layer.css({left:Math.max(20,(win.width()-1100)/2)+'px',top:Math.max(20,(win.height()-820)/2)+'px'})}},100)}
-function smPost(fn,data,cb){$('#sm-content').html('<div class="sm-panel"><div class="sm-empty">Loading...</div></div>');$.post('/plugin?action=a&name=security_monitor&s='+fn,data||{},function(r){smState.raw=r;if(cb)cb(r&&r.msg!==undefined?r.msg:r)})}
-function smEsc(v){return String(v===null||v===undefined?'':v).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function smBadge(v){return '<span class="sm-badge sm-'+smEsc(v||'low')+'">'+smEsc(v||'-')+'</span>'}
-function smTime(ts){if(!ts)return '-';return new Date(ts*1000).toLocaleString()}
-function smTab(tab){smState.tab=tab;$('.sm-nav').removeClass('active');$('.sm-nav[data-tab="'+tab+'"]').addClass('active');$('#sm-page-title').text(smTitles[tab][0]);$('#sm-page-desc').text(smTitles[tab][1]);smRefresh()}
-function smRefresh(){if(smState.tab==='overview')return smOverview();if(smState.tab==='events')return smEvents();if(smState.tab==='rules')return smRules();if(smState.tab==='bans')return smBans();if(smState.tab==='settings')return smSettings();return smRaw()}
-function smOverview(){smPost('get_overview',{},smRenderOverview)}
-function smEvents(){smPost('get_events',{limit:100},function(d){smRenderEvents(d||[])})}
-function smRules(){smPost('get_rules',{},function(d){smRenderRules(d||[])})}
-function smBans(){smPost('get_bans',{},function(d){smRenderBans(d||[])})}
-function smSettings(){smPost('get_settings',{},function(d){smRenderSettings(d||{})})}
-function smScan(){smPost('scan',{},function(d){smState.raw=d;smTab('raw')})}
-function smWaf(){smPost('generate_waf',{},function(d){smState.raw=d;smTab('raw')})}
-function smRaw(){var r=smState.raw||{};var msg=r.msg!==undefined?r.msg:r;var status=r.status===false?'Failed':'Success';var rows='';if(msg&&typeof msg==='object'&&!Array.isArray(msg)){rows=Object.keys(msg).map(function(k){return '<tr><td style="width:220px"><b>'+smEsc(k)+'</b></td><td><div class="sm-code">'+smEsc(typeof msg[k]==='object'?JSON.stringify(msg[k],null,2):msg[k])+'</div></td></tr>'}).join('')}else{rows='<tr><td><div class="sm-code">'+smEsc(JSON.stringify(msg,null,2))+'</div></td></tr>'}$('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Operation logs</div><button class="btn btn-default btn-xs" onclick="smRawJson()">JSON</button></div><div class="sm-table-wrap"><table class="sm-table"><thead><tr><th colspan="2">Last operation: '+smEsc(status)+'</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>')}
-function smRawJson(){$('#sm-content').html('<div class="sm-json">'+smEsc(JSON.stringify(smState.raw||{},null,2))+'</div>')}
-function smRenderOverview(d){d=d||{};var risks=(d.risks||[]).map(function(x){return smBadge(x.severity)+' '+smEsc(x.count)}).join(' ');var ips=(d.top_ips||[]).map(function(x){return '<tr><td>'+smEsc(x.ip)+'</td><td>'+smEsc(x.count)+'</td><td>'+smTime(x.last_seen)+'</td></tr>'}).join('');$('#sm-content').html('<div class="sm-grid"><div class="sm-card"><div class="sm-card-label">Total risks</div><div class="sm-card-value">'+smEsc(d.total_events||0)+'</div><div class="sm-card-hint">All detected events</div></div><div class="sm-card"><div class="sm-card-label">Today risks</div><div class="sm-card-value">'+smEsc(d.events_24h||0)+'</div><div class="sm-card-hint">Last 24 hours</div></div><div class="sm-card"><div class="sm-card-label">Blockade</div><div class="sm-card-value">'+smEsc(d.active_bans||0)+'</div><div class="sm-card-hint">Active or dry-run bans</div></div><div class="sm-card"><div class="sm-card-label">Risk type</div><div class="sm-risk-list">'+(risks||'<span class="sm-muted">No risks</span>')+'</div></div></div><div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Top attacking IP</div><button class="btn btn-default btn-xs" onclick="smTab(\'events\')">Details</button></div><div class="sm-table-wrap"><table class="sm-table"><thead><tr><th>IP address</th><th>Count</th><th>Last time</th></tr></thead><tbody>'+(ips||'<tr><td colspan="3"><div class="sm-empty">No data</div></td></tr>')+'</tbody></table></div></div>')}
-function smRenderEvents(rows){var html=rows.map(function(x){return '<tr><td style="width:150px"><b>'+smEsc(x.ip)+'</b><div class="sm-muted">'+smEsc(x.domain)+'</div></td><td style="width:110px">'+smBadge(x.severity)+'<div class="sm-muted">'+smEsc(x.category)+'</div></td><td style="width:170px">'+smEsc(x.rule_name)+'</td><td><div class="sm-code">'+smEsc(x.method)+' '+smEsc(x.uri)+'</div><div class="sm-muted">'+smEsc(x.user_agent)+'</div></td><td style="width:70px">'+smEsc(x.status)+'</td><td style="width:150px">'+smTime(x.ts)+'</td></tr>'}).join('');$('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Interception logs</div><button class="btn btn-success btn-xs" onclick="smScan()">Scan</button></div><div class="sm-table-wrap"><table class="sm-table"><thead><tr><th>Source</th><th>Severity</th><th>Rule</th><th>Request</th><th>Status</th><th>Time</th></tr></thead><tbody>'+(html||'<tr><td colspan="6"><div class="sm-empty">No events</div></td></tr>')+'</tbody></table></div></div>')}
-function smRenderRules(rows){var html=rows.map(function(x){return '<tr><td><b>'+smEsc(x.name)+'</b><div class="sm-muted">'+smEsc(x.id)+'</div></td><td>'+smBadge(x.severity)+'</td><td>'+smEsc(x.category)+'</td><td>'+smEsc(x.threshold)+' / '+smEsc(x.window_seconds)+'s</td><td>'+smEsc(x.ban_seconds)+'s</td><td>'+(x.enabled?'<span class="sm-badge sm-ok">enabled</span>':'<span class="sm-badge sm-medium">disabled</span>')+'</td></tr>'}).join('');$('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Protection rules</div><button class="btn btn-default btn-xs" onclick="smTestMatch()">Test Match</button></div><div class="sm-table-wrap"><table class="sm-table"><thead><tr><th>Rule</th><th>Level</th><th>Category</th><th>Threshold</th><th>Ban duration</th><th>Status</th></tr></thead><tbody>'+(html||'<tr><td colspan="6"><div class="sm-empty">No rules</div></td></tr>')+'</tbody></table></div></div>')}
-function smRenderBans(rows){var html=rows.map(function(x){return '<tr><td><b>'+smEsc(x.ip)+'</b></td><td>'+smEsc(x.reason)+'</td><td>'+smEsc(x.backend)+'</td><td>'+(x.dry_run?'<span class="sm-badge sm-medium">dry-run</span>':'<span class="sm-badge sm-high">active</span>')+'</td><td>'+smTime(x.created_at)+'</td><td>'+(x.expires_at?smTime(x.expires_at):'permanent')+'</td></tr>'}).join('');$('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Blockade list</div></div><div class="sm-table-wrap"><table class="sm-table"><thead><tr><th>IP address</th><th>Reason</th><th>Backend</th><th>Mode</th><th>Created</th><th>Expires</th></tr></thead><tbody>'+(html||'<tr><td colspan="6"><div class="sm-empty">No bans</div></td></tr>')+'</tbody></table></div></div>')}
-function smRenderSettings(d){$('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Global configuration</div><button class="btn btn-default btn-xs" onclick="smExport()">Export</button></div><div class="sm-form"><label>Service status</label><div>'+smEsc(d.enabled)+'</div><label>Dry-run mode</label><div>'+smEsc(d.dry_run)+'</div><label>Auto ban</label><div>'+smEsc(d.auto_ban)+'</div><label>Firewall backend</label><div>'+smEsc(d.firewall_backend)+'</div><label>Default ban time</label><div>'+smEsc(d.default_ban_seconds)+' seconds</div><label>Log paths</label><div><div class="sm-code">'+smEsc((d.log_paths||[]).join('\n'))+'</div></div><label>IP whitelist</label><div><div class="sm-code">'+smEsc((d.whitelist_ips||[]).join('\n'))+'</div></div></div></div>')}
-function smExport(){smPost('export_config',{},function(d){smState.raw=d;smTab('raw')})}
-function smExportReport(){smPost('export_report',{},function(d){smState.raw=d;smTab('raw')})}
-function smTestMatch(){var uri=prompt('URI to test','/.env');if(uri)smPost('test_match',{uri:uri,user_agent:'manual-test'},function(d){smState.raw=d;smTab('raw')})}
-smResizeLayer()
-smOverview()
+var S={tab:'overview',raw:null};
+var PG={
+  events:{page:1,perPage:20,search:'',sort:'ts',dir:'desc',filter:''},
+  rules:{page:1,perPage:15,search:'',sort:'name',dir:'asc',filter:''},
+  bans:{page:1,perPage:15,search:'',sort:'created_at',dir:'desc',filter:''}
+};
+var CACHE={};
+var TITLES={
+  overview:['Overview','Running status and summary'],
+  events:['Interception','Detected suspicious requests'],
+  rules:['Rules','Detection rules and thresholds'],
+  bans:['Blockade','Banned and dry-run IP records'],
+  settings:['Global','Runtime configuration'],
+  raw:['Logs','Operation result and JSON detail']
+};
+
+function smResizeLayer(){
+  setTimeout(function(){
+    var l=document.querySelector('.waf') && document.querySelector('.waf').closest('.layui-layer');
+    if(l){l.style.width='1130px';l.style.height='860px';l.style.left=Math.max(20,(window.innerWidth-1130)/2)+'px';l.style.top=Math.max(20,(window.innerHeight-860)/2)+'px';}
+  },100);
+}
+
+function smNotice(msg,ok){
+  if(window.layer&&layer.msg)layer.msg(msg,{icon:ok?1:2,time:1600});
+}
+function smPost(fn,data,cb){
+  document.getElementById('sm-content').innerHTML='<div style="padding:50px;text-align:center;color:var(--w-tx3);font-size:13px">Loading…</div>';
+  var done=function(r){
+    if(typeof r==='string'){
+      try{r=JSON.parse(r);}catch(e){r={status:false,msg:r};}
+    }
+    S.raw=r;
+    if(r&&r.status===false)smNotice(typeof r.msg==='string'?r.msg:'Request failed',false);
+    if(cb)cb(r&&r.msg!==undefined?r.msg:r);
+  };
+  var fail=function(){S.raw={status:false,msg:'Network error'};smNotice('Network error',false);if(cb)cb(null);};
+  if(window.$&&$.post){
+    $.post('/plugin?action=a&name=security_monitor&s='+fn,data||{},done).fail(fail);
+    return;
+  }
+  var p=new URLSearchParams(data||{});
+  fetch('/plugin?action=a&name=security_monitor&s='+fn,{method:'POST',body:p,headers:{'Content-Type':'application/x-www-form-urlencoded'},credentials:'same-origin'})
+    .then(function(r){return r.text();})
+    .then(done)
+    .catch(fail);
+}
+
+function esc(v){return String(v===null||v===undefined?'':v).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function badge(v){return '<span class="wbadge w'+esc(v||'low')+'">'+esc(v||'—')+'</span>';}
+function fmtTs(t){if(!t)return '<span style="color:var(--w-tx3)">—</span>';var d=new Date(t*1000);return d.toLocaleDateString()+' <span style="color:var(--w-tx3);font-size:11px">'+d.toLocaleTimeString()+'</span>';}
+
+function smTab(tab){
+  S.tab=tab;
+  document.querySelectorAll('.wnav').forEach(function(el){el.classList.remove('active');});
+  document.querySelector('.wnav[data-tab="'+tab+'"]').classList.add('active');
+  document.getElementById('sm-page-title').textContent=TITLES[tab][0];
+  document.getElementById('sm-page-desc').textContent=TITLES[tab][1];
+  smRefresh();
+}
+function smRefresh(){
+  if(S.tab==='overview')return smOverview();
+  if(S.tab==='events')return smEvents();
+  if(S.tab==='rules')return smRules();
+  if(S.tab==='bans')return smBans();
+  if(S.tab==='settings')return smSettings();
+  return smRaw();
+}
+function smScan(){smPost('scan',{},function(d){S.raw=d;smTab('raw');});}
+function smWaf(){smPost('generate_waf',{},function(d){S.raw=d;smTab('raw');});}
+function smOverview(){smPost('get_overview',{},smRenderOverview);}
+function smEvents(){smPost('get_events',{limit:500},function(d){CACHE.events=d||[];smRenderEvents();});}
+function smRules(){smPost('get_rules',{},function(d){CACHE.rules=d||[];smRenderRules();});}
+function smBans(){smPost('get_bans',{},function(d){CACHE.bans=d||[];smRenderBans();});}
+function smSettings(){smPost('get_settings',{},function(d){smRenderSettings(d||{});});}
+function smExport(){smPost('export_config',{},function(d){S.raw=d;smTab('raw');});}
+function smExportReport(){smPost('export_report',{},function(d){S.raw=d;smTab('raw');});}
+function smTestMatch(){var u=prompt('URI to test:','/.env');if(u)smPost('test_match',{uri:u,user_agent:'manual-test'},function(d){S.raw=d;smTab('raw');});}
+
+function sortArr(arr,key,dir){
+  return arr.slice().sort(function(a,b){
+    var av=a[key],bv=b[key];
+    if(av===undefined||av===null)av='';if(bv===undefined||bv===null)bv='';
+    if(typeof av==='boolean')av=av?1:0;if(typeof bv==='boolean')bv=bv?1:0;
+    if(!isNaN(Number(av))&&!isNaN(Number(bv))){av=Number(av);bv=Number(bv);}
+    else{av=String(av).toLowerCase();bv=String(bv).toLowerCase();}
+    return dir==='asc'?(av>bv?1:av<bv?-1:0):(av<bv?1:av>bv?-1:0);
+  });
+}
+
+function pgInfo(pg,total){
+  if(total===0)return 'No results';
+  var from=(pg.page-1)*pg.perPage+1,to=Math.min(pg.page*pg.perPage,total);
+  return 'Showing <b>'+from+'</b>–<b>'+to+'</b> of <b>'+total+'</b>';
+}
+
+function renderPager(pg,total,ns){
+  if(total===0)return '';
+  var pages=Math.max(1,Math.ceil(total/pg.perPage));
+  pg.page=Math.min(pg.page,pages);
+  var pgFn='function(p,pp){PG[\''+ns+'\'].page=p;if(pp)PG[\''+ns+'\'].perPage=pp;smRender_'+ns+'();}';
+  var nums='';
+  var s=Math.max(1,pg.page-2),e=Math.min(pages,pg.page+2);
+  if(s>1){nums+='<button class="wpb" onclick="('+pgFn+')(1)">1</button>';if(s>2)nums+='<span style="font-size:11px;color:var(--w-tx3);padding:0 1px">…</span>';}
+  for(var i=s;i<=e;i++)nums+='<button class="wpb'+(i===pg.page?' cur':'')+'" onclick="('+pgFn+')('+i+')">'+i+'</button>';
+  if(e<pages){if(e<pages-1)nums+='<span style="font-size:11px;color:var(--w-tx3);padding:0 1px">…</span>';nums+='<button class="wpb" onclick="('+pgFn+')('+pages+')">'+pages+'</button>';}
+  return '<div class="wpager"><span class="wpager-info">'+pgInfo(pg,total)+'</span>'
+    +'<div class="wpager-btns">'
+    +'<button class="wpb" onclick="('+pgFn+')('+Math.max(1,pg.page-1)+')" '+(pg.page<=1?'disabled':'')+' title="Previous"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>'
+    +nums
+    +'<button class="wpb" onclick="('+pgFn+')('+Math.min(pages,pg.page+1)+')" '+(pg.page>=pages?'disabled':'')+' title="Next"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>'
+    +'</div>'
+    +'<select class="wsel" onchange="('+pgFn+')(1,parseInt(this.value))">'
+    +'<option value="10"'+(pg.perPage===10?' selected':'')+'>10 / page</option>'
+    +'<option value="20"'+(pg.perPage===20?' selected':'')+'>20 / page</option>'
+    +'<option value="50"'+(pg.perPage===50?' selected':'')+'>50 / page</option>'
+    +'<option value="100"'+(pg.perPage===100?' selected':'')+'>100 / page</option>'
+    +'</select></div>';
+}
+
+function thSort(pg,k,label,w,ns){
+  var cls=pg.sort===k?' '+(pg.dir==='asc'?'asc':'desc'):'';
+  var style=w?'width:'+w+';':'';
+  return '<th class="wsort'+cls+'" onclick="smSort_'+ns+'(\''+k+'\')" style="'+style+'">'+label+'</th>';
+}
+
+function smRenderOverview(d){
+  d=d||{};
+  var risks=(d.risks||[]).map(function(x){return badge(x.severity)+' <span style="font-size:12px;font-weight:600;color:var(--w-tx)">'+esc(x.count)+'</span>';}).join('');
+  var ips=(d.top_ips||[]).map(function(x){return '<tr><td style="width:200px;font-weight:600">'+esc(x.ip)+'</td><td style="width:80px"><span class="wbadge whigh">'+esc(x.count)+'</span></td><td>'+fmtTs(x.last_seen)+'</td></tr>';}).join('');
+  document.getElementById('sm-content').innerHTML=
+    '<div class="wgrid">'
+    +'<div class="wcard"><div class="wc-icon ic-bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="wc-label">Total risks</div><div class="wc-val">'+esc(d.total_events||0)+'</div><div class="wc-hint">All detected events</div></div>'
+    +'<div class="wcard"><div class="wc-icon ic-am"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="wc-label">Last 24h</div><div class="wc-val">'+esc(d.events_24h||0)+'</div><div class="wc-hint">Today events</div></div>'
+    +'<div class="wcard"><div class="wc-icon ic-re"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div><div class="wc-label">Blockade</div><div class="wc-val">'+esc(d.active_bans||0)+'</div><div class="wc-hint">Active or dry-run bans</div></div>'
+    +'<div class="wcard"><div class="wc-icon ic-gr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div><div class="wc-label">Risk types</div><div class="wrisk">'+(risks||'<span style="font-size:11px;color:var(--w-tx3)">None detected</span>')+'</div></div>'
+    +'</div>'
+    +'<div class="wpanel"><div class="wph"><div class="wph-l"><div class="wpt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Top attacking IPs</div></div><div class="wph-r"><button class="wb" onclick="smTab(\'events\')" style="height:26px;font-size:11px">View all</button></div></div>'
+    +'<div class="wtable-wrap"><table class="wtable"><thead><tr><th style="width:200px">IP address</th><th style="width:80px">Count</th><th>Last seen</th></tr></thead>'
+    +'<tbody>'+(ips||'<tr><td colspan="3"><div class="wempty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>No attacks detected</span></div></td></tr>')+'</tbody></table></div></div>';
+}
+
+function smRender_events(){smRenderEvents();}
+function smSort_events(k){var pg=PG.events;pg.dir=(pg.sort===k&&pg.dir==='asc')?'desc':'asc';pg.sort=k;pg.page=1;smRenderEvents();}
+function smRenderEvents(){
+  var all=CACHE.events||[];var pg=PG.events;
+  var q=pg.search.toLowerCase(),f=pg.filter;
+  var fil=all.filter(function(x){
+    if(f&&f!==x.severity)return false;
+    if(q&&!(String(x.ip||'').toLowerCase().includes(q)||String(x.uri||'').toLowerCase().includes(q)||String(x.rule_name||'').toLowerCase().includes(q)||String(x.domain||'').toLowerCase().includes(q)))return false;
+    return true;
+  });
+  var sorted=sortArr(fil,pg.sort,pg.dir);
+  var total=sorted.length;
+  pg.page=Math.min(pg.page,Math.max(1,Math.ceil(total/pg.perPage)));
+  var sl=sorted.slice((pg.page-1)*pg.perPage,pg.page*pg.perPage);
+  var rows=sl.map(function(x){
+    return '<tr>'
+      +'<td style="width:140px"><div style="font-weight:600">'+esc(x.ip)+'</div><div class="wmuted">'+esc(x.domain)+'</div></td>'
+      +'<td style="width:100px">'+badge(x.severity)+'<div class="wmuted">'+esc(x.category)+'</div></td>'
+      +'<td style="width:150px;color:var(--w-tx2);font-size:11.5px">'+esc(x.rule_name)+'</td>'
+      +'<td><div class="wcode">'+esc(x.method)+' '+esc(x.uri)+'</div><div class="wmuted" style="margin-top:2px">'+esc(x.user_agent)+'</div></td>'
+      +'<td style="width:60px;font-weight:600;font-size:12px">'+esc(x.status)+'</td>'
+      +'<td style="width:130px;font-size:11.5px">'+fmtTs(x.ts)+'</td>'
+      +'</tr>';
+  }).join('');
+  document.getElementById('sm-content').innerHTML=
+    '<div class="wpanel" style="display:flex;flex-direction:column">'
+    +'<div class="wph"><div class="wph-l"><div class="wpt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Interception logs</div><span class="wbadge wmedium" style="font-size:10px">'+total+' records</span></div>'
+    +'<div class="wph-r"><select class="wsel" onchange="PG.events.filter=this.value;PG.events.page=1;smRenderEvents()"><option value="">All severity</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="critical">Critical</option></select><input class="wsearch" placeholder="Search IP, URI, rule…" value="'+esc(pg.search)+'" oninput="PG.events.search=this.value;PG.events.page=1;smRenderEvents()"><button class="wb" onclick="smScan()" style="height:26px;font-size:11px">Scan now</button></div></div>'
+    +'<div class="wtable-wrap"><table class="wtable"><thead><tr>'
+    +thSort(pg,'ip','Source','140px','events')
+    +thSort(pg,'severity','Severity','100px','events')
+    +thSort(pg,'rule_name','Rule','150px','events')
+    +'<th>Request</th>'
+    +thSort(pg,'status','Status','60px','events')
+    +thSort(pg,'ts','Time','130px','events')
+    +'</tr></thead><tbody>'+(rows||'<tr><td colspan="6"><div class="wempty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>No events found</span></div></td></tr>')+'</tbody></table></div>'
+    +renderPager(pg,total,'events')
+    +'</div>';
+}
+
+function smRender_rules(){smRenderRules();}
+function smSort_rules(k){var pg=PG.rules;pg.dir=(pg.sort===k&&pg.dir==='asc')?'desc':'asc';pg.sort=k;pg.page=1;smRenderRules();}
+function smRenderRules(){
+  var all=CACHE.rules||[];var pg=PG.rules;
+  var q=pg.search.toLowerCase();
+  var fil=all.filter(function(x){if(!q)return true;return String(x.name||'').toLowerCase().includes(q)||String(x.category||'').toLowerCase().includes(q);});
+  var sorted=sortArr(fil,pg.sort,pg.dir);
+  var total=sorted.length;
+  pg.page=Math.min(pg.page,Math.max(1,Math.ceil(total/pg.perPage)));
+  var sl=sorted.slice((pg.page-1)*pg.perPage,pg.page*pg.perPage);
+  var rows=sl.map(function(x){
+    return '<tr>'
+      +'<td style="width:200px"><div style="font-weight:600">'+esc(x.name)+'</div><div class="wmuted">'+esc(x.id)+'</div></td>'
+      +'<td style="width:85px">'+badge(x.severity)+'</td>'
+      +'<td style="width:120px;color:var(--w-tx2)">'+esc(x.category)+'</td>'
+      +'<td style="width:115px;color:var(--w-tx2)">'+esc(x.threshold)+' / '+esc(x.window_seconds)+'s</td>'
+      +'<td style="width:90px;color:var(--w-tx2)">'+esc(x.ban_seconds)+'s</td>'
+      +'<td>'+(x.enabled?'<span class="wbadge wok">enabled</span>':'<span class="wbadge wmedium">disabled</span>')+'</td>'
+      +'</tr>';
+  }).join('');
+  document.getElementById('sm-content').innerHTML=
+    '<div class="wpanel" style="display:flex;flex-direction:column">'
+    +'<div class="wph"><div class="wph-l"><div class="wpt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Protection rules</div><span class="wbadge wmedium" style="font-size:10px">'+total+' rules</span></div>'
+    +'<div class="wph-r"><input class="wsearch" placeholder="Search rules…" value="'+esc(pg.search)+'" oninput="PG.rules.search=this.value;PG.rules.page=1;smRenderRules()"><button class="wb" onclick="smTestMatch()" style="height:26px;font-size:11px">Test match</button></div></div>'
+    +'<div class="wtable-wrap"><table class="wtable"><thead><tr>'
+    +thSort(pg,'name','Rule','200px','rules')
+    +thSort(pg,'severity','Level','85px','rules')
+    +thSort(pg,'category','Category','120px','rules')
+    +'<th style="width:115px">Threshold</th><th style="width:90px">Ban duration</th>'
+    +thSort(pg,'enabled','Status','','rules')
+    +'</tr></thead><tbody>'+(rows||'<tr><td colspan="6"><div class="wempty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>No rules configured</span></div></td></tr>')+'</tbody></table></div>'
+    +renderPager(pg,total,'rules')
+    +'</div>';
+}
+
+function smRender_bans(){smRenderBans();}
+function smSort_bans(k){var pg=PG.bans;pg.dir=(pg.sort===k&&pg.dir==='asc')?'desc':'asc';pg.sort=k;pg.page=1;smRenderBans();}
+function smRenderBans(){
+  var all=CACHE.bans||[];var pg=PG.bans;
+  var q=pg.search.toLowerCase(),f=pg.filter;
+  var fil=all.filter(function(x){
+    if(f==='dry'&&!x.dry_run)return false;
+    if(f==='active'&&x.dry_run)return false;
+    if(q&&!(String(x.ip||'').toLowerCase().includes(q)||String(x.reason||'').toLowerCase().includes(q)))return false;
+    return true;
+  });
+  var sorted=sortArr(fil,pg.sort,pg.dir);
+  var total=sorted.length;
+  pg.page=Math.min(pg.page,Math.max(1,Math.ceil(total/pg.perPage)));
+  var sl=sorted.slice((pg.page-1)*pg.perPage,pg.page*pg.perPage);
+  var rows=sl.map(function(x){
+    return '<tr>'
+      +'<td style="width:140px;font-weight:600;font-family:Menlo,monospace;font-size:11.5px">'+esc(x.ip)+'</td>'
+      +'<td style="color:var(--w-tx2)">'+esc(x.reason)+'</td>'
+      +'<td style="width:90px;color:var(--w-tx3);font-size:11.5px">'+esc(x.backend)+'</td>'
+      +'<td style="width:85px">'+(x.dry_run?'<span class="wbadge wmedium">dry-run</span>':'<span class="wbadge whigh">active</span>')+'</td>'
+      +'<td style="width:125px;font-size:11.5px">'+fmtTs(x.created_at)+'</td>'
+      +'<td style="width:125px;font-size:11.5px">'+(x.expires_at?fmtTs(x.expires_at):'<span class="wbadge wcritical">permanent</span>')+'</td>'
+      +'</tr>';
+  }).join('');
+  document.getElementById('sm-content').innerHTML=
+    '<div class="wpanel" style="display:flex;flex-direction:column">'
+    +'<div class="wph"><div class="wph-l"><div class="wpt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>Blockade list</div><span class="wbadge whigh" style="font-size:10px">'+total+' banned</span></div>'
+    +'<div class="wph-r"><select class="wsel" onchange="PG.bans.filter=this.value;PG.bans.page=1;smRenderBans()"><option value="">All modes</option><option value="active">Active</option><option value="dry">Dry-run</option></select><input class="wsearch" placeholder="Search IP or reason…" value="'+esc(pg.search)+'" oninput="PG.bans.search=this.value;PG.bans.page=1;smRenderBans()"></div></div>'
+    +'<div class="wtable-wrap"><table class="wtable"><thead><tr>'
+    +thSort(pg,'ip','IP address','140px','bans')
+    +'<th>Reason</th>'
+    +thSort(pg,'backend','Backend','90px','bans')
+    +thSort(pg,'dry_run','Mode','85px','bans')
+    +thSort(pg,'created_at','Created','125px','bans')
+    +thSort(pg,'expires_at','Expires','125px','bans')
+    +'</tr></thead><tbody>'+(rows||'<tr><td colspan="6"><div class="wempty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>No banned IPs</span></div></td></tr>')+'</tbody></table></div>'
+    +renderPager(pg,total,'bans')
+    +'</div>';
+}
+
+function smRenderSettings(d){
+  function row(lbl,val){return '<div class="wfl-lbl">'+esc(lbl)+'</div><div class="wfv">'+val+'</div>';}
+  function bool(v){return v?'<span class="wbadge wok">enabled</span>':'<span class="wbadge wmedium">disabled</span>';}
+  document.getElementById('sm-content').innerHTML=
+    '<div class="wpanel"><div class="wph"><div class="wph-l"><div class="wpt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Global configuration</div></div><div class="wph-r"><button class="wb" onclick="smExport()" style="height:26px;font-size:11px">Export config</button></div></div>'
+    +'<div class="wform">'+row('Service status',bool(d.enabled))+row('Dry-run mode',bool(d.dry_run))+row('Auto ban',bool(d.auto_ban))+row('Firewall backend','<code style="font-family:Menlo,monospace;font-size:12px;background:var(--w-code);padding:2px 6px;border-radius:4px;color:var(--w-tx2)">'+esc(d.firewall_backend)+'</code>')+row('Default ban time','<b>'+esc(d.default_ban_seconds)+'</b> seconds')+row('Log paths','<div class="wcode">'+esc((d.log_paths||[]).join('\n'))+'</div>')+row('IP whitelist','<div class="wcode">'+esc((d.whitelist_ips||[]).join('\n'))+'</div>')+'</div></div>';
+}
+
+function smRaw(){
+  var r=S.raw||{};var msg=r.msg!==undefined?r.msg:r;var ok=r.status!==false;
+  var rows='';
+  if(msg&&typeof msg==='object'&&!Array.isArray(msg)){
+    rows=Object.keys(msg).map(function(k){return '<tr><td style="width:200px;font-weight:600;color:var(--w-tx2)">'+esc(k)+'</td><td><div class="wcode">'+esc(typeof msg[k]==='object'?JSON.stringify(msg[k],null,2):msg[k])+'</div></td></tr>';}).join('');
+  }else{rows='<tr><td><div class="wcode">'+esc(JSON.stringify(msg,null,2))+'</div></td></tr>';}
+  document.getElementById('sm-content').innerHTML=
+    '<div class="wpanel"><div class="wph"><div class="wph-l"><div class="wpt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>Operation result</div>'+(ok?'<span class="wbadge wok">Success</span>':'<span class="wbadge whigh">Failed</span>')+'</div><div class="wph-r"><button class="wb" onclick="smRawJson()" style="height:26px;font-size:11px">Raw JSON</button></div></div>'
+    +'<div class="wtable-wrap"><table class="wtable"><thead><tr><th style="width:200px">Key</th><th>Value</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+}
+function smRawJson(){document.getElementById('sm-content').innerHTML='<div class="wjson">'+esc(JSON.stringify(S.raw||{},null,2))+'</div>';}
+
+smResizeLayer();
+smOverview();
 </script>
