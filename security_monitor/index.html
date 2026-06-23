@@ -1,79 +1,64 @@
 <style>
-.security-monitor{background:#f5f7fb;padding:18px;border-radius:10px;color:#1f2937}.sm-hero{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#111827,#1f3b73);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px;box-shadow:0 10px 30px rgba(17,24,39,.16)}.sm-title{font-size:22px;font-weight:700;margin-bottom:4px}.sm-subtitle{color:#cbd5e1}.sm-actions .btn{margin-left:8px;border-radius:8px}.sm-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}.sm-tab{border:1px solid #dbe3ef;background:#fff;border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;color:#475569}.sm-tab.active{background:#2563eb;color:#fff;border-color:#2563eb;box-shadow:0 8px 18px rgba(37,99,235,.22)}.sm-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.sm-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.06)}.sm-card-label{font-size:12px;text-transform:uppercase;color:#64748b;font-weight:700;letter-spacing:.04em}.sm-card-value{font-size:28px;font-weight:800;margin-top:8px;color:#111827}.sm-panel{background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.06)}.sm-panel-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #e5e7eb}.sm-panel-title{font-size:15px;font-weight:800}.sm-table{width:100%;border-collapse:collapse}.sm-table th{background:#f8fafc;color:#475569;font-size:12px;text-transform:uppercase;text-align:left;padding:11px;border-bottom:1px solid #e5e7eb}.sm-table td{padding:11px;border-bottom:1px solid #eef2f7;vertical-align:top}.sm-badge{display:inline-block;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:700}.sm-low{background:#e0f2fe;color:#0369a1}.sm-medium{background:#fef3c7;color:#92400e}.sm-high{background:#fee2e2;color:#b91c1c}.sm-critical{background:#7f1d1d;color:#fff}.sm-muted{color:#64748b}.sm-code{font-family:monospace;background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;padding:8px;word-break:break-all}.sm-empty{padding:28px;text-align:center;color:#64748b}.sm-form{display:grid;grid-template-columns:180px 1fr;gap:10px 14px;padding:16px}.sm-form input,.sm-form textarea,.sm-form select{border:1px solid #dbe3ef;border-radius:8px;padding:8px;width:100%}.sm-json{white-space:pre-wrap;background:#0f172a;color:#dbeafe;padding:14px;border-radius:12px;min-height:300px;overflow:auto}@media(max-width:1000px){.sm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sm-hero{display:block}.sm-actions{margin-top:12px}.sm-actions .btn{margin:0 6px 6px 0}}@media(max-width:640px){.sm-grid{grid-template-columns:1fr}.sm-form{grid-template-columns:1fr}}
+.security-monitor{height:720px;max-height:720px;background:#f3f6fb;border:1px solid #dfe6f1;border-radius:4px;padding:0;color:#333;overflow:hidden}.sm-shell{height:100%;display:flex;flex-direction:column}.sm-header{height:74px;flex:0 0 74px;background:#fff;border-bottom:1px solid #e6ebf2;display:flex;align-items:center;justify-content:space-between;padding:0 18px}.sm-brand{display:flex;align-items:center;gap:12px}.sm-logo{width:38px;height:38px;border-radius:8px;background:#20a53a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700}.sm-title{font-size:18px;font-weight:700;color:#202b3c;line-height:22px}.sm-subtitle{font-size:12px;color:#7b8794;margin-top:2px}.sm-actions{display:flex;align-items:center;gap:8px}.sm-body{flex:1;min-height:0;display:flex}.sm-sidebar{width:185px;flex:0 0 185px;background:#fff;border-right:1px solid #e6ebf2;padding:12px 0}.sm-nav{height:38px;line-height:38px;padding:0 18px;cursor:pointer;border-left:3px solid transparent;color:#4b5563;font-size:13px}.sm-nav:hover{background:#f5f8fc;color:#20a53a}.sm-nav.active{background:#eefaf1;border-left-color:#20a53a;color:#20a53a;font-weight:700}.sm-main{flex:1;min-width:0;display:flex;flex-direction:column}.sm-toolbar{height:50px;flex:0 0 50px;background:#fff;border-bottom:1px solid #e6ebf2;display:flex;align-items:center;justify-content:space-between;padding:0 14px}.sm-toolbar-title{font-size:15px;font-weight:700;color:#202b3c}.sm-toolbar-desc{font-size:12px;color:#8a95a3;margin-left:8px;font-weight:400}.sm-content{flex:1;min-height:0;padding:14px;overflow:hidden}.sm-scroll{height:100%;overflow:auto}.sm-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.sm-card{background:#fff;border:1px solid #e6ebf2;border-radius:4px;padding:14px}.sm-card-label{font-size:12px;color:#7b8794}.sm-card-value{font-size:28px;font-weight:700;color:#202b3c;margin-top:6px}.sm-card-hint{font-size:12px;color:#99a3af;margin-top:4px}.sm-panel{background:#fff;border:1px solid #e6ebf2;border-radius:4px;overflow:hidden}.sm-panel+.sm-panel{margin-top:14px}.sm-panel-head{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid #e6ebf2;background:#fbfcfe}.sm-panel-title{font-weight:700;color:#202b3c}.sm-table-wrap{height:470px;overflow:auto}.sm-table{width:100%;border-collapse:collapse;table-layout:fixed}.sm-table th{position:sticky;top:0;background:#f7f9fc;color:#5f6b7a;font-size:12px;font-weight:700;text-align:left;padding:10px;border-bottom:1px solid #e6ebf2;z-index:1}.sm-table td{padding:10px;border-bottom:1px solid #eef2f7;vertical-align:top;font-size:12px;color:#344054}.sm-table tr:hover td{background:#fbfdff}.sm-badge{display:inline-block;border-radius:3px;padding:2px 7px;font-size:12px;line-height:18px}.sm-low{background:#e8f5ff;color:#1677b9}.sm-medium{background:#fff7e6;color:#b26a00}.sm-high{background:#fff1f0;color:#cf1322}.sm-critical{background:#cf1322;color:#fff}.sm-ok{background:#edf9f0;color:#208a36}.sm-muted{color:#8a95a3}.sm-code{font-family:Menlo,Consolas,monospace;background:#f7f9fc;border:1px solid #e6ebf2;border-radius:3px;padding:6px;word-break:break-all;max-height:70px;overflow:auto}.sm-empty{height:220px;display:flex;align-items:center;justify-content:center;color:#8a95a3}.sm-json{height:100%;overflow:auto;white-space:pre-wrap;background:#1f2937;color:#dbeafe;padding:12px;border-radius:4px;font-family:Menlo,Consolas,monospace}.sm-form{padding:14px;display:grid;grid-template-columns:180px 1fr;gap:12px 16px}.sm-form label{color:#5f6b7a;font-weight:700}.sm-status{display:flex;align-items:center;gap:8px}.sm-dot{width:8px;height:8px;border-radius:50%;background:#20a53a}.sm-risk-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}@media(max-width:1100px){.security-monitor{height:680px}.sm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sm-sidebar{width:150px;flex-basis:150px}}@media(max-width:760px){.sm-body{display:block;overflow:auto}.sm-sidebar{width:auto;border-right:0;border-bottom:1px solid #e6ebf2;display:flex;overflow:auto;padding:0}.sm-nav{white-space:nowrap;border-left:0;border-bottom:3px solid transparent}.sm-nav.active{border-bottom-color:#20a53a}.sm-main{height:560px}.sm-grid{grid-template-columns:1fr}.sm-header{height:auto;padding:12px;display:block}.sm-actions{margin-top:10px}}
 </style>
 <div class="bt-form security-monitor">
-  <div class="sm-hero">
-    <div>
-      <div class="sm-title">Security Monitor</div>
-      <div class="sm-subtitle">Web attack monitoring, risk review, and safe IP banning for aaPanel.</div>
+  <div class="sm-shell">
+    <div class="sm-header">
+      <div class="sm-brand">
+        <div class="sm-logo">W</div>
+        <div>
+          <div class="sm-title">Simple WAF</div>
+          <div class="sm-subtitle">Security monitoring and IP blockade for aaPanel</div>
+        </div>
+      </div>
+      <div class="sm-actions">
+        <button class="btn btn-success btn-sm" onclick="smScan()">Scan Now</button>
+        <button class="btn btn-default btn-sm" onclick="smRefresh()">Refresh</button>
+        <button class="btn btn-warning btn-sm" onclick="smWaf()">Generate WAF</button>
+      </div>
     </div>
-    <div class="sm-actions">
-      <button class="btn btn-success btn-sm" onclick="smScan()">Scan Now</button>
-      <button class="btn btn-warning btn-sm" onclick="smWaf()">Generate WAF</button>
-      <button class="btn btn-default btn-sm" onclick="smRefresh()">Refresh</button>
+    <div class="sm-body">
+      <div class="sm-sidebar">
+        <div class="sm-nav active" data-tab="overview" onclick="smTab('overview')">Home</div>
+        <div class="sm-nav" data-tab="events" onclick="smTab('events')">Interception</div>
+        <div class="sm-nav" data-tab="rules" onclick="smTab('rules')">Rules</div>
+        <div class="sm-nav" data-tab="bans" onclick="smTab('bans')">Blockade</div>
+        <div class="sm-nav" data-tab="settings" onclick="smTab('settings')">Global</div>
+        <div class="sm-nav" data-tab="raw" onclick="smTab('raw')">Logs</div>
+      </div>
+      <div class="sm-main">
+        <div class="sm-toolbar">
+          <div><span class="sm-toolbar-title" id="sm-page-title">Home</span><span class="sm-toolbar-desc" id="sm-page-desc">Overview and running status</span></div>
+          <div class="sm-status"><span class="sm-dot"></span><span class="sm-muted">Dry-run safe mode</span></div>
+        </div>
+        <div class="sm-content"><div id="sm-content" class="sm-scroll"></div></div>
+      </div>
     </div>
   </div>
-  <div class="sm-tabs">
-    <div class="sm-tab active" data-tab="overview" onclick="smTab('overview')">Overview</div>
-    <div class="sm-tab" data-tab="events" onclick="smTab('events')">Events</div>
-    <div class="sm-tab" data-tab="rules" onclick="smTab('rules')">Rules</div>
-    <div class="sm-tab" data-tab="bans" onclick="smTab('bans')">Bans</div>
-    <div class="sm-tab" data-tab="settings" onclick="smTab('settings')">Settings</div>
-    <div class="sm-tab" data-tab="raw" onclick="smTab('raw')">Raw</div>
-  </div>
-  <div id="sm-content"></div>
 </div>
 <script>
-var smState = {tab:'overview', overview:null, events:[], rules:[], bans:[], settings:null, raw:null}
-function smPost(fn, data, cb) {
-  $('#sm-content').html('<div class="sm-panel"><div class="sm-empty">Loading...</div></div>')
-  $.post('/plugin?action=a&name=security_monitor&s=' + fn, data || {}, function(r) {
-    smState.raw = r
-    if (cb) cb(r && r.msg !== undefined ? r.msg : r)
-  })
-}
-function smEsc(v) { return String(v === null || v === undefined ? '' : v).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]}) }
-function smBadge(v) { return '<span class="sm-badge sm-' + smEsc(v || 'low') + '">' + smEsc(v || '-') + '</span>' }
-function smTime(ts) { if (!ts) return '-'; var d = new Date(ts * 1000); return d.toLocaleString() }
-function smTab(tab) { smState.tab = tab; $('.sm-tab').removeClass('active'); $('.sm-tab[data-tab="'+tab+'"]').addClass('active'); smRefresh() }
-function smRefresh() {
-  if (smState.tab === 'overview') return smOverview()
-  if (smState.tab === 'events') return smEvents()
-  if (smState.tab === 'rules') return smRules()
-  if (smState.tab === 'bans') return smBans()
-  if (smState.tab === 'settings') return smSettings()
-  return smRaw()
-}
-function smOverview() { smPost('get_overview', {}, function(d){ smState.overview=d; smRenderOverview(d) }) }
-function smEvents() { smPost('get_events', {limit:100}, function(d){ smState.events=d || []; smRenderEvents(smState.events) }) }
-function smRules() { smPost('get_rules', {}, function(d){ smState.rules=d || []; smRenderRules(smState.rules) }) }
-function smBans() { smPost('get_bans', {}, function(d){ smState.bans=d || []; smRenderBans(smState.bans) }) }
-function smSettings() { smPost('get_settings', {}, function(d){ smState.settings=d || {}; smRenderSettings(smState.settings) }) }
-function smScan() { smPost('scan', {}, function(d){ smState.raw=d; smTab('raw') }) }
-function smWaf() { smPost('generate_waf', {}, function(d){ smState.raw=d; smTab('raw') }) }
-function smRaw() { $('#sm-content').html('<div class="sm-json">'+smEsc(JSON.stringify(smState.raw || {}, null, 2))+'</div>') }
-function smRenderOverview(d) {
-  d = d || {}
-  var risks = (d.risks || []).map(function(x){return smBadge(x.severity)+' '+smEsc(x.count)}).join(' &nbsp; ')
-  var ips = (d.top_ips || []).map(function(x){return '<tr><td>'+smEsc(x.ip)+'</td><td>'+smEsc(x.count)+'</td><td>'+smTime(x.last_seen)+'</td></tr>'}).join('')
-  $('#sm-content').html('<div class="sm-grid"><div class="sm-card"><div class="sm-card-label">Total Events</div><div class="sm-card-value">'+smEsc(d.total_events || 0)+'</div></div><div class="sm-card"><div class="sm-card-label">Events 24h</div><div class="sm-card-value">'+smEsc(d.events_24h || 0)+'</div></div><div class="sm-card"><div class="sm-card-label">Active Bans</div><div class="sm-card-value">'+smEsc(d.active_bans || 0)+'</div></div><div class="sm-card"><div class="sm-card-label">Risk Levels</div><div style="margin-top:12px">'+(risks || '<span class="sm-muted">No risks</span>')+'</div></div></div><div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Top Attacking IP</div><button class="btn btn-default btn-xs" onclick="smTab(\'events\')">View Events</button></div><table class="sm-table"><thead><tr><th>IP</th><th>Count</th><th>Last Seen</th></tr></thead><tbody>'+(ips || '<tr><td colspan="3" class="sm-empty">No data</td></tr>')+'</tbody></table></div>')
-}
-function smRenderEvents(rows) {
-  var html = rows.map(function(x){return '<tr><td><b>'+smEsc(x.ip)+'</b><div class="sm-muted">'+smEsc(x.domain)+'</div></td><td>'+smBadge(x.severity)+'<div class="sm-muted">'+smEsc(x.category)+'</div></td><td>'+smEsc(x.rule_name)+'</td><td><div class="sm-code">'+smEsc(x.method)+' '+smEsc(x.uri)+'</div><div class="sm-muted">'+smEsc(x.user_agent)+'</div></td><td>'+smEsc(x.status)+'</td><td>'+smTime(x.ts)+'</td></tr>'}).join('')
-  $('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Recent Events</div><button class="btn btn-success btn-xs" onclick="smScan()">Scan Now</button></div><table class="sm-table"><thead><tr><th>Source</th><th>Severity</th><th>Rule</th><th>Request</th><th>Status</th><th>Time</th></tr></thead><tbody>'+(html || '<tr><td colspan="6" class="sm-empty">No events</td></tr>')+'</tbody></table></div>')
-}
-function smRenderRules(rows) {
-  var html = rows.map(function(x){return '<tr><td><b>'+smEsc(x.name)+'</b><div class="sm-muted">'+smEsc(x.id)+'</div></td><td>'+smBadge(x.severity)+'</td><td>'+smEsc(x.category)+'</td><td>'+smEsc(x.threshold)+' / '+smEsc(x.window_seconds)+'s</td><td>'+smEsc(x.ban_seconds)+'s</td><td>'+(x.enabled ? '<span class="sm-badge sm-low">enabled</span>' : '<span class="sm-badge sm-medium">disabled</span>')+'</td></tr>'}).join('')
-  $('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Rules</div><button class="btn btn-default btn-xs" onclick="smTestMatch()">Test Match</button></div><table class="sm-table"><thead><tr><th>Rule</th><th>Severity</th><th>Category</th><th>Threshold</th><th>Ban</th><th>Status</th></tr></thead><tbody>'+(html || '<tr><td colspan="6" class="sm-empty">No rules</td></tr>')+'</tbody></table></div>')
-}
-function smRenderBans(rows) {
-  var html = rows.map(function(x){return '<tr><td><b>'+smEsc(x.ip)+'</b></td><td>'+smEsc(x.reason)+'</td><td>'+smEsc(x.backend)+'</td><td>'+(x.dry_run ? '<span class="sm-badge sm-medium">dry-run</span>' : '<span class="sm-badge sm-high">active</span>')+'</td><td>'+smTime(x.created_at)+'</td><td>'+(x.expires_at ? smTime(x.expires_at) : 'permanent')+'</td></tr>'}).join('')
-  $('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Banned IPs</div></div><table class="sm-table"><thead><tr><th>IP</th><th>Reason</th><th>Backend</th><th>Mode</th><th>Created</th><th>Expires</th></tr></thead><tbody>'+(html || '<tr><td colspan="6" class="sm-empty">No bans</td></tr>')+'</tbody></table></div>')
-}
-function smRenderSettings(d) {
-  $('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Settings</div><button class="btn btn-default btn-xs" onclick="smExport()">Export</button></div><div class="sm-form"><label>Enabled</label><div>'+smEsc(d.enabled)+'</div><label>Dry Run</label><div>'+smEsc(d.dry_run)+'</div><label>Auto Ban</label><div>'+smEsc(d.auto_ban)+'</div><label>Firewall</label><div>'+smEsc(d.firewall_backend)+'</div><label>Default Ban</label><div>'+smEsc(d.default_ban_seconds)+'s</div><label>Logs</label><div><div class="sm-code">'+smEsc((d.log_paths || []).join('\n'))+'</div></div><label>Whitelist IPs</label><div><div class="sm-code">'+smEsc((d.whitelist_ips || []).join('\n'))+'</div></div></div></div>')
-}
-function smExport() { smPost('export_config', {}, function(d){ smState.raw=d; smTab('raw') }) }
-function smTestMatch() { var uri = prompt('URI to test', '/.env'); if (uri) smPost('test_match', {uri:uri,user_agent:'manual-test'}, function(d){ smState.raw=d; smTab('raw') }) }
+var smState={tab:'overview',raw:null}
+var smTitles={overview:['Home','Overview and running status'],events:['Interception','Detected suspicious requests'],rules:['Rules','Detection rules and thresholds'],bans:['Blockade','Banned and dry-run IP records'],settings:['Global','Runtime configuration'],raw:['Logs','Raw API output']}
+function smPost(fn,data,cb){$('#sm-content').html('<div class="sm-panel"><div class="sm-empty">Loading...</div></div>');$.post('/plugin?action=a&name=security_monitor&s='+fn,data||{},function(r){smState.raw=r;if(cb)cb(r&&r.msg!==undefined?r.msg:r)})}
+function smEsc(v){return String(v===null||v===undefined?'':v).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function smBadge(v){return '<span class="sm-badge sm-'+smEsc(v||'low')+'">'+smEsc(v||'-')+'</span>'}
+function smTime(ts){if(!ts)return '-';return new Date(ts*1000).toLocaleString()}
+function smTab(tab){smState.tab=tab;$('.sm-nav').removeClass('active');$('.sm-nav[data-tab="'+tab+'"]').addClass('active');$('#sm-page-title').text(smTitles[tab][0]);$('#sm-page-desc').text(smTitles[tab][1]);smRefresh()}
+function smRefresh(){if(smState.tab==='overview')return smOverview();if(smState.tab==='events')return smEvents();if(smState.tab==='rules')return smRules();if(smState.tab==='bans')return smBans();if(smState.tab==='settings')return smSettings();return smRaw()}
+function smOverview(){smPost('get_overview',{},smRenderOverview)}
+function smEvents(){smPost('get_events',{limit:100},function(d){smRenderEvents(d||[])})}
+function smRules(){smPost('get_rules',{},function(d){smRenderRules(d||[])})}
+function smBans(){smPost('get_bans',{},function(d){smRenderBans(d||[])})}
+function smSettings(){smPost('get_settings',{},function(d){smRenderSettings(d||{})})}
+function smScan(){smPost('scan',{},function(d){smState.raw=d;smTab('raw')})}
+function smWaf(){smPost('generate_waf',{},function(d){smState.raw=d;smTab('raw')})}
+function smRaw(){$('#sm-content').html('<div class="sm-json">'+smEsc(JSON.stringify(smState.raw||{},null,2))+'</div>')}
+function smRenderOverview(d){d=d||{};var risks=(d.risks||[]).map(function(x){return smBadge(x.severity)+' '+smEsc(x.count)}).join(' ');var ips=(d.top_ips||[]).map(function(x){return '<tr><td>'+smEsc(x.ip)+'</td><td>'+smEsc(x.count)+'</td><td>'+smTime(x.last_seen)+'</td></tr>'}).join('');$('#sm-content').html('<div class="sm-grid"><div class="sm-card"><div class="sm-card-label">Total risks</div><div class="sm-card-value">'+smEsc(d.total_events||0)+'</div><div class="sm-card-hint">All detected events</div></div><div class="sm-card"><div class="sm-card-label">Today risks</div><div class="sm-card-value">'+smEsc(d.events_24h||0)+'</div><div class="sm-card-hint">Last 24 hours</div></div><div class="sm-card"><div class="sm-card-label">Blockade</div><div class="sm-card-value">'+smEsc(d.active_bans||0)+'</div><div class="sm-card-hint">Active or dry-run bans</div></div><div class="sm-card"><div class="sm-card-label">Risk type</div><div class="sm-risk-list">'+(risks||'<span class="sm-muted">No risks</span>')+'</div></div></div><div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Top attacking IP</div><button class="btn btn-default btn-xs" onclick="smTab(\'events\')">Details</button></div><div class="sm-table-wrap"><table class="sm-table"><thead><tr><th>IP address</th><th>Count</th><th>Last time</th></tr></thead><tbody>'+(ips||'<tr><td colspan="3"><div class="sm-empty">No data</div></td></tr>')+'</tbody></table></div></div>')}
+function smRenderEvents(rows){var html=rows.map(function(x){return '<tr><td style="width:150px"><b>'+smEsc(x.ip)+'</b><div class="sm-muted">'+smEsc(x.domain)+'</div></td><td style="width:110px">'+smBadge(x.severity)+'<div class="sm-muted">'+smEsc(x.category)+'</div></td><td style="width:170px">'+smEsc(x.rule_name)+'</td><td><div class="sm-code">'+smEsc(x.method)+' '+smEsc(x.uri)+'</div><div class="sm-muted">'+smEsc(x.user_agent)+'</div></td><td style="width:70px">'+smEsc(x.status)+'</td><td style="width:150px">'+smTime(x.ts)+'</td></tr>'}).join('');$('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Interception logs</div><button class="btn btn-success btn-xs" onclick="smScan()">Scan</button></div><div class="sm-table-wrap"><table class="sm-table"><thead><tr><th>Source</th><th>Severity</th><th>Rule</th><th>Request</th><th>Status</th><th>Time</th></tr></thead><tbody>'+(html||'<tr><td colspan="6"><div class="sm-empty">No events</div></td></tr>')+'</tbody></table></div></div>')}
+function smRenderRules(rows){var html=rows.map(function(x){return '<tr><td><b>'+smEsc(x.name)+'</b><div class="sm-muted">'+smEsc(x.id)+'</div></td><td>'+smBadge(x.severity)+'</td><td>'+smEsc(x.category)+'</td><td>'+smEsc(x.threshold)+' / '+smEsc(x.window_seconds)+'s</td><td>'+smEsc(x.ban_seconds)+'s</td><td>'+(x.enabled?'<span class="sm-badge sm-ok">enabled</span>':'<span class="sm-badge sm-medium">disabled</span>')+'</td></tr>'}).join('');$('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Protection rules</div><button class="btn btn-default btn-xs" onclick="smTestMatch()">Test Match</button></div><div class="sm-table-wrap"><table class="sm-table"><thead><tr><th>Rule</th><th>Level</th><th>Category</th><th>Threshold</th><th>Ban duration</th><th>Status</th></tr></thead><tbody>'+(html||'<tr><td colspan="6"><div class="sm-empty">No rules</div></td></tr>')+'</tbody></table></div></div>')}
+function smRenderBans(rows){var html=rows.map(function(x){return '<tr><td><b>'+smEsc(x.ip)+'</b></td><td>'+smEsc(x.reason)+'</td><td>'+smEsc(x.backend)+'</td><td>'+(x.dry_run?'<span class="sm-badge sm-medium">dry-run</span>':'<span class="sm-badge sm-high">active</span>')+'</td><td>'+smTime(x.created_at)+'</td><td>'+(x.expires_at?smTime(x.expires_at):'permanent')+'</td></tr>'}).join('');$('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Blockade list</div></div><div class="sm-table-wrap"><table class="sm-table"><thead><tr><th>IP address</th><th>Reason</th><th>Backend</th><th>Mode</th><th>Created</th><th>Expires</th></tr></thead><tbody>'+(html||'<tr><td colspan="6"><div class="sm-empty">No bans</div></td></tr>')+'</tbody></table></div></div>')}
+function smRenderSettings(d){$('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Global configuration</div><button class="btn btn-default btn-xs" onclick="smExport()">Export</button></div><div class="sm-form"><label>Service status</label><div>'+smEsc(d.enabled)+'</div><label>Dry-run mode</label><div>'+smEsc(d.dry_run)+'</div><label>Auto ban</label><div>'+smEsc(d.auto_ban)+'</div><label>Firewall backend</label><div>'+smEsc(d.firewall_backend)+'</div><label>Default ban time</label><div>'+smEsc(d.default_ban_seconds)+' seconds</div><label>Log paths</label><div><div class="sm-code">'+smEsc((d.log_paths||[]).join('\n'))+'</div></div><label>IP whitelist</label><div><div class="sm-code">'+smEsc((d.whitelist_ips||[]).join('\n'))+'</div></div></div></div>')}
+function smExport(){smPost('export_config',{},function(d){smState.raw=d;smTab('raw')})}
+function smTestMatch(){var uri=prompt('URI to test','/.env');if(uri)smPost('test_match',{uri:uri,user_agent:'manual-test'},function(d){smState.raw=d;smTab('raw')})}
 smOverview()
 </script>
