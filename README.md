@@ -1,10 +1,14 @@
 # Simple WAF aaPanel
 
-Simple WAF aaPanel is an aaPanel plugin source for monitoring suspicious web requests from webserver logs and preparing IP bans with safe dry-run defaults.
+Simple WAF aaPanel is an aaPanel plugin for monitoring suspicious web requests from webserver logs and preparing IP bans with safe dry-run defaults.
+
+Current version: `0.2.0`
 
 ## Features
 
 - Nginx log monitoring from `/www/wwwlogs/*.log`
+- aaPanel-style fixed-size dashboard with internal scroll
+- Light/dark theme adaptation based on aaPanel theme classes
 - Rule engine for common web attack probes
 - Detection categories:
   - sensitive files
@@ -26,7 +30,6 @@ Simple WAF aaPanel is an aaPanel plugin source for monitoring suspicious web req
 - Whitelist IP/path support
 - Auto-unban by expiry timestamp
 - Nginx WAF rule generator
-- aaPanel plugin UI entry
 - Safe defaults:
   - dry-run enabled
   - auto-ban disabled
@@ -46,8 +49,80 @@ security_monitor/
 filter.d/
 fixtures/
 tests/
-dist/
 sensitive-paths.conf
+```
+
+## Install on VPS with aaPanel
+
+### 1. Clone repository
+
+Use HTTPS:
+
+```bash
+cd /tmp
+git clone https://github.com/iam-rizz/Simple-WAF-AAPANEL.git
+cd Simple-WAF-AAPANEL
+```
+
+Or use SSH if your VPS has deploy key configured:
+
+```bash
+cd /tmp
+git clone git@github.com-wafaapanel:iam-rizz/Simple-WAF-AAPANEL.git
+cd Simple-WAF-AAPANEL
+```
+
+### 2. Install plugin
+
+```bash
+bash security_monitor/install.sh
+```
+
+Plugin target path:
+
+```text
+/www/server/panel/plugin/security_monitor
+```
+
+Installer uses `python3` first, then falls back to aaPanel Python path when available.
+
+### 3. Restart aaPanel
+
+```bash
+bt restart
+```
+
+### 4. Test dry-run scanner
+
+```bash
+python3 /www/server/panel/plugin/security_monitor/security_monitor_main.py
+```
+
+Expected output example:
+
+```json
+{
+  "status": true,
+  "msg": {
+    "scanned": 6,
+    "matched": 0,
+    "banned": 0,
+    "dry_run": true
+  }
+}
+```
+
+### 5. Open plugin
+
+Open aaPanel, then open **Security Monitor / Simple WAF** from plugin list.
+
+## Update on VPS
+
+```bash
+cd /tmp/Simple-WAF-AAPANEL
+git pull
+bash security_monitor/install.sh
+bt restart
 ```
 
 ## Build package
@@ -62,36 +137,26 @@ Output:
 dist/security_monitor.zip
 ```
 
-## Install on aaPanel server
+## Dashboard pages
 
-Copy source or zip to server, then run:
+- **Home**: overview, total risks, risks in last 24h, blockade count, top attacking IPs
+- **Interception**: detected suspicious requests from logs
+- **Rules**: detection rules, severity, threshold, ban duration
+- **Blockade**: dry-run or active ban records
+- **Global**: runtime configuration
+- **Logs**: last operation result in table format, with JSON view button
 
-```bash
-bash security_monitor/install.sh
-```
-
-Plugin target path:
-
-```text
-/www/server/panel/plugin/security_monitor
-```
-
-## Run scanner manually
-
-```bash
-python3 security_monitor/security_monitor_main.py
-```
-
-Default scan result is dry-run only.
+The **Logs** page is not raw webserver logs. It shows the latest plugin operation/API result. Actual detected requests are shown in **Interception**.
 
 ## Recommended rollout
 
 1. Install plugin on aaPanel server.
 2. Keep `dry_run: true` and `auto_ban: false`.
 3. Run for 24 hours.
-4. Review false positives in Events.
-5. Enable auto-ban for high/critical rules only.
-6. Enable generated Nginx WAF rules per-domain only after testing.
+4. Review false positives in **Interception**.
+5. Whitelist your admin IP.
+6. Enable auto-ban for high/critical rules only.
+7. Enable generated Nginx WAF rules per-domain only after testing.
 
 ## Tests
 
