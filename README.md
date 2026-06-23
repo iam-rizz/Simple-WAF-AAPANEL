@@ -2,13 +2,14 @@
 
 Simple WAF aaPanel is an aaPanel plugin for monitoring suspicious web requests from webserver logs and preparing IP bans with safe dry-run defaults.
 
-Current version: `0.2.0`
+Current version: `0.3.0`
 
 ## Features
 
 - Nginx log monitoring from `/www/wwwlogs/*.log`
 - aaPanel-style fixed-size dashboard with internal scroll
 - Light/dark theme adaptation based on aaPanel theme classes
+- Export report for sharing detected events, summary, bans, and settings
 - Rule engine for common web attack probes
 - Detection categories:
   - sensitive files
@@ -144,9 +145,29 @@ dist/security_monitor.zip
 - **Rules**: detection rules, severity, threshold, ban duration
 - **Blockade**: dry-run or active ban records
 - **Global**: runtime configuration
-- **Logs**: last operation result in table format, with JSON view button
+- **Logs**: last operation result in table format, with full-size JSON view button
 
 The **Logs** page is not raw webserver logs. It shows the latest plugin operation/API result. Actual detected requests are shown in **Interception**.
+
+## Export report
+
+Click **Export Report** in the dashboard header. The plugin creates a JSON report under:
+
+```text
+/www/server/panel/plugin/security_monitor/data/security-monitor-report-YYYYMMDD-HHMMSS.json
+```
+
+Report contains:
+
+- generated time
+- settings
+- summary
+- risk counts
+- top attacking IPs
+- recent events
+- ban records
+
+Use this file to share investigation results.
 
 ## Recommended rollout
 

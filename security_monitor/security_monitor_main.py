@@ -121,6 +121,29 @@ class security_monitor_main:
     def export_config(self, args=None):
         return ok({'settings': load_settings(), 'rules': load_rules()})
 
+    def export_report(self, args=None):
+        conn = db()
+        now = int(time.time())
+        report = {
+            'generated_at': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'settings': load_settings(),
+            'summary': {
+                'total_events': conn.execute('select count(*) from events').fetchone()[0],
+                'events_24h': conn.execute('select count(*) from events where ts > ?', (now - 86400,)).fetchone()[0],
+                'active_bans': conn.execute('select count(*) from bans where active=1 and (expires_at=0 or expires_at>?)', (now,)).fetchone()[0]
+            },
+            'risks': query_dicts(conn, 'select severity,count(*) as count from events group by severity order by count desc'),
+            'top_ips': query_dicts(conn, 'select ip,count(*) as count,max(ts) as last_seen from events group by ip order by count desc limit 20'),
+            'recent_events': query_dicts(conn, 'select * from events order by ts desc limit 200'),
+            'bans': query_dicts(conn, 'select * from bans order by created_at desc limit 200')
+        }
+        conn.close()
+        path = os.path.join(DATA_PATH, 'security-monitor-report-%s.json' % datetime.utcnow().strftime('%Y%m%d-%H%M%S'))
+        with open(path, 'w') as f:
+            json.dump(report, f, indent=2, sort_keys=True)
+        report['path'] = path
+        return ok(report)
+
     def import_config(self, args):
         data = json.loads(args.config) if isinstance(args.config, str) else args.config
         if 'settings' in data:
