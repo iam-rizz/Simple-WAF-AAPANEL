@@ -467,11 +467,40 @@ function smRenderBans(){
 }
 
 function smRenderSettings(d){
-  function row(lbl,val){return '<div class="wfl-lbl">'+esc(lbl)+'</div><div class="wfv">'+val+'</div>';}
-  function bool(v){return v?'<span class="wbadge wok">enabled</span>':'<span class="wbadge wmedium">disabled</span>';}
+  d=d||{};
+  function checked(v){return v?' checked':'';}
+  function textList(v){return esc((v||[]).join('\n'));}
   document.getElementById('sm-content').innerHTML=
-    '<div class="wpanel"><div class="wph"><div class="wph-l"><div class="wpt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Global configuration</div></div><div class="wph-r"><button class="wb" onclick="smExport()" style="height:26px;font-size:11px">Export config</button></div></div>'
-    +'<div class="wform">'+row('Service status',bool(d.enabled))+row('Dry-run mode',bool(d.dry_run))+row('Auto ban',bool(d.auto_ban))+row('Firewall backend','<code style="font-family:Menlo,monospace;font-size:12px;background:var(--w-code);padding:2px 6px;border-radius:4px;color:var(--w-tx2)">'+esc(d.firewall_backend)+'</code>')+row('Default ban time','<b>'+esc(d.default_ban_seconds)+'</b> seconds')+row('Log paths','<div class="wcode">'+esc((d.log_paths||[]).join('\n'))+'</div>')+row('IP whitelist','<div class="wcode">'+esc((d.whitelist_ips||[]).join('\n'))+'</div>')+'</div></div>';
+    '<div class="wpanel"><div class="wph"><div class="wph-l"><div class="wpt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06A2 2 0 0 1 7.1 4.3l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Global configuration</div></div><div class="wph-r"><button class="wb" onclick="smExport()" style="height:26px;font-size:11px">Export config</button><button class="wb pri" onclick="smSaveSettings()" style="height:26px;font-size:11px">Save</button></div></div>'
+    +'<div class="wform">'
+    +'<div class="wfl-lbl">Service status</div><div class="wfv"><label><input id="set_enabled" type="checkbox"'+checked(d.enabled)+'> Enable scanner</label></div>'
+    +'<div class="wfl-lbl">Dry-run mode</div><div class="wfv"><label><input id="set_dry_run" type="checkbox"'+checked(d.dry_run)+'> Do not touch firewall, record only</label></div>'
+    +'<div class="wfl-lbl">Auto ban</div><div class="wfv"><label><input id="set_auto_ban" type="checkbox"'+checked(d.auto_ban)+'> Ban IP when threshold reached</label> <span class="wbadge wmedium">keep off until tested</span></div>'
+    +'<div class="wfl-lbl">Private IP whitelist</div><div class="wfv"><label><input id="set_private_ip_whitelist" type="checkbox"'+checked(d.private_ip_whitelist)+'> Ignore private/local IP ranges</label></div>'
+    +'<div class="wfl-lbl">Firewall backend</div><div class="wfv"><select id="set_firewall_backend" class="wsel"><option value="auto">auto</option><option value="ufw">ufw</option><option value="firewalld">firewalld</option><option value="iptables">iptables</option><option value="none">none</option></select></div>'
+    +'<div class="wfl-lbl">Default ban time</div><div class="wfv"><input id="set_default_ban_seconds" class="wsearch" style="width:140px" type="number" min="0" value="'+esc(d.default_ban_seconds||3600)+'"> seconds <span class="wmuted">0 = permanent</span></div>'
+    +'<div class="wfl-lbl">Scan limit lines</div><div class="wfv"><input id="set_scan_limit_lines" class="wsearch" style="width:140px" type="number" min="100" value="'+esc(d.scan_limit_lines||5000)+'"> lines per log</div>'
+    +'<div class="wfl-lbl">Log paths</div><div class="wfv"><textarea id="set_log_paths" class="wsearch" style="width:100%;height:86px;line-height:18px;padding:8px">'+textList(d.log_paths)+'</textarea><div class="wmuted">One glob per line. Example: /www/wwwlogs/*.log</div></div>'
+    +'<div class="wfl-lbl">IP whitelist</div><div class="wfv"><textarea id="set_whitelist_ips" class="wsearch" style="width:100%;height:76px;line-height:18px;padding:8px">'+textList(d.whitelist_ips)+'</textarea></div>'
+    +'<div class="wfl-lbl">Path whitelist</div><div class="wfv"><textarea id="set_whitelist_paths" class="wsearch" style="width:100%;height:76px;line-height:18px;padding:8px">'+textList(d.whitelist_paths)+'</textarea></div>'
+    +'</div></div>';
+  document.getElementById('set_firewall_backend').value=d.firewall_backend||'auto';
+}
+function smLines(id){return document.getElementById(id).value.split('\n').map(function(x){return x.trim();}).filter(Boolean);}
+function smSaveSettings(){
+  var settings={
+    enabled:document.getElementById('set_enabled').checked,
+    dry_run:document.getElementById('set_dry_run').checked,
+    auto_ban:document.getElementById('set_auto_ban').checked,
+    private_ip_whitelist:document.getElementById('set_private_ip_whitelist').checked,
+    firewall_backend:document.getElementById('set_firewall_backend').value,
+    default_ban_seconds:parseInt(document.getElementById('set_default_ban_seconds').value||'3600'),
+    scan_limit_lines:parseInt(document.getElementById('set_scan_limit_lines').value||'5000'),
+    log_paths:smLines('set_log_paths'),
+    whitelist_ips:smLines('set_whitelist_ips'),
+    whitelist_paths:smLines('set_whitelist_paths')
+  };
+  smPost('save_settings',{settings:JSON.stringify(settings)},function(d){S.raw={status:true,msg:d};smNotice('Settings saved',true);smSettings();});
 }
 
 function smRaw(){
