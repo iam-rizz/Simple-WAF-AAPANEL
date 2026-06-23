@@ -87,6 +87,20 @@ Plugin target path:
 
 Installer uses `python3` first, then falls back to aaPanel Python path when available.
 
+Installer also creates cron file:
+
+```text
+/etc/cron.d/simple-waf-aapanel
+```
+
+Cron runs scanner every 1 minute with `flock`, so checks are near real-time and will not overlap.
+
+Cron log:
+
+```text
+/www/server/panel/plugin/security_monitor/data/cron.log
+```
+
 ### 3. Restart aaPanel
 
 ```bash

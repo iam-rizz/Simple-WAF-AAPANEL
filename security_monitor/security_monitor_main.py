@@ -295,6 +295,11 @@ def should_ban(conn, ip, rule):
 
 def ban_ip(ip, reason, seconds, settings):
     now = int(time.time())
+    conn = db()
+    row = conn.execute('select * from bans where ip=? and active=1 and (expires_at=0 or expires_at>?) order by created_at desc limit 1', (ip, now)).fetchone()
+    if row:
+        conn.close()
+        return {'success': True, 'ip': ip, 'skipped': True, 'output': 'already active'}
     expires = 0 if int(seconds) <= 0 else now + int(seconds)
     backend = detect_backend(settings.get('firewall_backend', 'auto'))
     dry = bool(settings.get('dry_run', True) or not settings.get('auto_ban', False))
@@ -302,7 +307,6 @@ def ban_ip(ip, reason, seconds, settings):
     output = 'dry-run'
     if not dry:
         success, output = firewall_ban(ip, backend)
-    conn = db()
     conn.execute('insert into bans(ip,reason,backend,created_at,expires_at,active,dry_run) values(?,?,?,?,?,?,?)', (ip, reason, backend, now, expires, 1 if success else 0, 1 if dry else 0))
     conn.commit()
     conn.close()

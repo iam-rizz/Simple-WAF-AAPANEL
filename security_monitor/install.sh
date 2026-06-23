@@ -18,5 +18,12 @@ mkdir -p "$DST_DIR"
 cp -a "$SRC_DIR"/* "$DST_DIR"/
 chown -R www:www "$DST_DIR" 2>/dev/null || true
 "$PYTHON_BIN" "$DST_DIR/security_monitor_main.py" >/dev/null
+CRON_FILE="/etc/cron.d/simple-waf-aapanel"
+CRON_LOG="/www/server/panel/plugin/$PLUGIN/data/cron.log"
+if [ -d /etc/cron.d ]; then
+  printf '%s\n' "* * * * * root flock -n /tmp/simple-waf-aapanel.lock $PYTHON_BIN $DST_DIR/task.py >> $CRON_LOG 2>&1" > "$CRON_FILE"
+  chmod 644 "$CRON_FILE"
+fi
 printf '%s\n' "installed: $DST_DIR"
 printf '%s\n' "python: $PYTHON_BIN"
+printf '%s\n' "cron: $CRON_FILE"
