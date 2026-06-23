@@ -1,33 +1,79 @@
+<style>
+.security-monitor{background:#f5f7fb;padding:18px;border-radius:10px;color:#1f2937}.sm-hero{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#111827,#1f3b73);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px;box-shadow:0 10px 30px rgba(17,24,39,.16)}.sm-title{font-size:22px;font-weight:700;margin-bottom:4px}.sm-subtitle{color:#cbd5e1}.sm-actions .btn{margin-left:8px;border-radius:8px}.sm-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}.sm-tab{border:1px solid #dbe3ef;background:#fff;border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;color:#475569}.sm-tab.active{background:#2563eb;color:#fff;border-color:#2563eb;box-shadow:0 8px 18px rgba(37,99,235,.22)}.sm-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.sm-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px;box-shadow:0 8px 24px rgba(15,23,42,.06)}.sm-card-label{font-size:12px;text-transform:uppercase;color:#64748b;font-weight:700;letter-spacing:.04em}.sm-card-value{font-size:28px;font-weight:800;margin-top:8px;color:#111827}.sm-panel{background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.06)}.sm-panel-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #e5e7eb}.sm-panel-title{font-size:15px;font-weight:800}.sm-table{width:100%;border-collapse:collapse}.sm-table th{background:#f8fafc;color:#475569;font-size:12px;text-transform:uppercase;text-align:left;padding:11px;border-bottom:1px solid #e5e7eb}.sm-table td{padding:11px;border-bottom:1px solid #eef2f7;vertical-align:top}.sm-badge{display:inline-block;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:700}.sm-low{background:#e0f2fe;color:#0369a1}.sm-medium{background:#fef3c7;color:#92400e}.sm-high{background:#fee2e2;color:#b91c1c}.sm-critical{background:#7f1d1d;color:#fff}.sm-muted{color:#64748b}.sm-code{font-family:monospace;background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;padding:8px;word-break:break-all}.sm-empty{padding:28px;text-align:center;color:#64748b}.sm-form{display:grid;grid-template-columns:180px 1fr;gap:10px 14px;padding:16px}.sm-form input,.sm-form textarea,.sm-form select{border:1px solid #dbe3ef;border-radius:8px;padding:8px;width:100%}.sm-json{white-space:pre-wrap;background:#0f172a;color:#dbeafe;padding:14px;border-radius:12px;min-height:300px;overflow:auto}@media(max-width:1000px){.sm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sm-hero{display:block}.sm-actions{margin-top:12px}.sm-actions .btn{margin:0 6px 6px 0}}@media(max-width:640px){.sm-grid{grid-template-columns:1fr}.sm-form{grid-template-columns:1fr}}
+</style>
 <div class="bt-form security-monitor">
-  <div class="plugin-title">Security Monitor</div>
-  <div class="plugin-desc">Dry-run first. Auto-ban and WAF are off until enabled.</div>
-  <div class="btn-group" style="margin:10px 0">
-    <button class="btn btn-success btn-sm" onclick="smScan()">Scan Now</button>
-    <button class="btn btn-default btn-sm" onclick="smOverview()">Overview</button>
-    <button class="btn btn-default btn-sm" onclick="smEvents()">Events</button>
-    <button class="btn btn-default btn-sm" onclick="smRules()">Rules</button>
-    <button class="btn btn-default btn-sm" onclick="smBans()">Bans</button>
-    <button class="btn btn-default btn-sm" onclick="smSettings()">Settings</button>
-    <button class="btn btn-warning btn-sm" onclick="smWaf()">Generate WAF</button>
+  <div class="sm-hero">
+    <div>
+      <div class="sm-title">Security Monitor</div>
+      <div class="sm-subtitle">Web attack monitoring, risk review, and safe IP banning for aaPanel.</div>
+    </div>
+    <div class="sm-actions">
+      <button class="btn btn-success btn-sm" onclick="smScan()">Scan Now</button>
+      <button class="btn btn-warning btn-sm" onclick="smWaf()">Generate WAF</button>
+      <button class="btn btn-default btn-sm" onclick="smRefresh()">Refresh</button>
+    </div>
   </div>
-  <div class="line" style="margin:10px 0"></div>
-  <pre id="sm-output" style="min-height:420px;white-space:pre-wrap">Loading...</pre>
+  <div class="sm-tabs">
+    <div class="sm-tab active" data-tab="overview" onclick="smTab('overview')">Overview</div>
+    <div class="sm-tab" data-tab="events" onclick="smTab('events')">Events</div>
+    <div class="sm-tab" data-tab="rules" onclick="smTab('rules')">Rules</div>
+    <div class="sm-tab" data-tab="bans" onclick="smTab('bans')">Bans</div>
+    <div class="sm-tab" data-tab="settings" onclick="smTab('settings')">Settings</div>
+    <div class="sm-tab" data-tab="raw" onclick="smTab('raw')">Raw</div>
+  </div>
+  <div id="sm-content"></div>
 </div>
 <script>
+var smState = {tab:'overview', overview:null, events:[], rules:[], bans:[], settings:null, raw:null}
 function smPost(fn, data, cb) {
+  $('#sm-content').html('<div class="sm-panel"><div class="sm-empty">Loading...</div></div>')
   $.post('/plugin?action=a&name=security_monitor&s=' + fn, data || {}, function(r) {
-    if (cb) cb(r)
+    smState.raw = r
+    if (cb) cb(r && r.msg !== undefined ? r.msg : r)
   })
 }
-function smShow(r) {
-  $('#sm-output').text(JSON.stringify(r, null, 2))
+function smEsc(v) { return String(v === null || v === undefined ? '' : v).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]}) }
+function smBadge(v) { return '<span class="sm-badge sm-' + smEsc(v || 'low') + '">' + smEsc(v || '-') + '</span>' }
+function smTime(ts) { if (!ts) return '-'; var d = new Date(ts * 1000); return d.toLocaleString() }
+function smTab(tab) { smState.tab = tab; $('.sm-tab').removeClass('active'); $('.sm-tab[data-tab="'+tab+'"]').addClass('active'); smRefresh() }
+function smRefresh() {
+  if (smState.tab === 'overview') return smOverview()
+  if (smState.tab === 'events') return smEvents()
+  if (smState.tab === 'rules') return smRules()
+  if (smState.tab === 'bans') return smBans()
+  if (smState.tab === 'settings') return smSettings()
+  return smRaw()
 }
-function smOverview() { smPost('get_overview', {}, smShow) }
-function smEvents() { smPost('get_events', {limit: 100}, smShow) }
-function smRules() { smPost('get_rules', {}, smShow) }
-function smBans() { smPost('get_bans', {}, smShow) }
-function smSettings() { smPost('get_settings', {}, smShow) }
-function smScan() { smPost('scan', {}, smShow) }
-function smWaf() { smPost('generate_waf', {}, smShow) }
+function smOverview() { smPost('get_overview', {}, function(d){ smState.overview=d; smRenderOverview(d) }) }
+function smEvents() { smPost('get_events', {limit:100}, function(d){ smState.events=d || []; smRenderEvents(smState.events) }) }
+function smRules() { smPost('get_rules', {}, function(d){ smState.rules=d || []; smRenderRules(smState.rules) }) }
+function smBans() { smPost('get_bans', {}, function(d){ smState.bans=d || []; smRenderBans(smState.bans) }) }
+function smSettings() { smPost('get_settings', {}, function(d){ smState.settings=d || {}; smRenderSettings(smState.settings) }) }
+function smScan() { smPost('scan', {}, function(d){ smState.raw=d; smTab('raw') }) }
+function smWaf() { smPost('generate_waf', {}, function(d){ smState.raw=d; smTab('raw') }) }
+function smRaw() { $('#sm-content').html('<div class="sm-json">'+smEsc(JSON.stringify(smState.raw || {}, null, 2))+'</div>') }
+function smRenderOverview(d) {
+  d = d || {}
+  var risks = (d.risks || []).map(function(x){return smBadge(x.severity)+' '+smEsc(x.count)}).join(' &nbsp; ')
+  var ips = (d.top_ips || []).map(function(x){return '<tr><td>'+smEsc(x.ip)+'</td><td>'+smEsc(x.count)+'</td><td>'+smTime(x.last_seen)+'</td></tr>'}).join('')
+  $('#sm-content').html('<div class="sm-grid"><div class="sm-card"><div class="sm-card-label">Total Events</div><div class="sm-card-value">'+smEsc(d.total_events || 0)+'</div></div><div class="sm-card"><div class="sm-card-label">Events 24h</div><div class="sm-card-value">'+smEsc(d.events_24h || 0)+'</div></div><div class="sm-card"><div class="sm-card-label">Active Bans</div><div class="sm-card-value">'+smEsc(d.active_bans || 0)+'</div></div><div class="sm-card"><div class="sm-card-label">Risk Levels</div><div style="margin-top:12px">'+(risks || '<span class="sm-muted">No risks</span>')+'</div></div></div><div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Top Attacking IP</div><button class="btn btn-default btn-xs" onclick="smTab(\'events\')">View Events</button></div><table class="sm-table"><thead><tr><th>IP</th><th>Count</th><th>Last Seen</th></tr></thead><tbody>'+(ips || '<tr><td colspan="3" class="sm-empty">No data</td></tr>')+'</tbody></table></div>')
+}
+function smRenderEvents(rows) {
+  var html = rows.map(function(x){return '<tr><td><b>'+smEsc(x.ip)+'</b><div class="sm-muted">'+smEsc(x.domain)+'</div></td><td>'+smBadge(x.severity)+'<div class="sm-muted">'+smEsc(x.category)+'</div></td><td>'+smEsc(x.rule_name)+'</td><td><div class="sm-code">'+smEsc(x.method)+' '+smEsc(x.uri)+'</div><div class="sm-muted">'+smEsc(x.user_agent)+'</div></td><td>'+smEsc(x.status)+'</td><td>'+smTime(x.ts)+'</td></tr>'}).join('')
+  $('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Recent Events</div><button class="btn btn-success btn-xs" onclick="smScan()">Scan Now</button></div><table class="sm-table"><thead><tr><th>Source</th><th>Severity</th><th>Rule</th><th>Request</th><th>Status</th><th>Time</th></tr></thead><tbody>'+(html || '<tr><td colspan="6" class="sm-empty">No events</td></tr>')+'</tbody></table></div>')
+}
+function smRenderRules(rows) {
+  var html = rows.map(function(x){return '<tr><td><b>'+smEsc(x.name)+'</b><div class="sm-muted">'+smEsc(x.id)+'</div></td><td>'+smBadge(x.severity)+'</td><td>'+smEsc(x.category)+'</td><td>'+smEsc(x.threshold)+' / '+smEsc(x.window_seconds)+'s</td><td>'+smEsc(x.ban_seconds)+'s</td><td>'+(x.enabled ? '<span class="sm-badge sm-low">enabled</span>' : '<span class="sm-badge sm-medium">disabled</span>')+'</td></tr>'}).join('')
+  $('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Rules</div><button class="btn btn-default btn-xs" onclick="smTestMatch()">Test Match</button></div><table class="sm-table"><thead><tr><th>Rule</th><th>Severity</th><th>Category</th><th>Threshold</th><th>Ban</th><th>Status</th></tr></thead><tbody>'+(html || '<tr><td colspan="6" class="sm-empty">No rules</td></tr>')+'</tbody></table></div>')
+}
+function smRenderBans(rows) {
+  var html = rows.map(function(x){return '<tr><td><b>'+smEsc(x.ip)+'</b></td><td>'+smEsc(x.reason)+'</td><td>'+smEsc(x.backend)+'</td><td>'+(x.dry_run ? '<span class="sm-badge sm-medium">dry-run</span>' : '<span class="sm-badge sm-high">active</span>')+'</td><td>'+smTime(x.created_at)+'</td><td>'+(x.expires_at ? smTime(x.expires_at) : 'permanent')+'</td></tr>'}).join('')
+  $('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Banned IPs</div></div><table class="sm-table"><thead><tr><th>IP</th><th>Reason</th><th>Backend</th><th>Mode</th><th>Created</th><th>Expires</th></tr></thead><tbody>'+(html || '<tr><td colspan="6" class="sm-empty">No bans</td></tr>')+'</tbody></table></div>')
+}
+function smRenderSettings(d) {
+  $('#sm-content').html('<div class="sm-panel"><div class="sm-panel-head"><div class="sm-panel-title">Settings</div><button class="btn btn-default btn-xs" onclick="smExport()">Export</button></div><div class="sm-form"><label>Enabled</label><div>'+smEsc(d.enabled)+'</div><label>Dry Run</label><div>'+smEsc(d.dry_run)+'</div><label>Auto Ban</label><div>'+smEsc(d.auto_ban)+'</div><label>Firewall</label><div>'+smEsc(d.firewall_backend)+'</div><label>Default Ban</label><div>'+smEsc(d.default_ban_seconds)+'s</div><label>Logs</label><div><div class="sm-code">'+smEsc((d.log_paths || []).join('\n'))+'</div></div><label>Whitelist IPs</label><div><div class="sm-code">'+smEsc((d.whitelist_ips || []).join('\n'))+'</div></div></div></div>')
+}
+function smExport() { smPost('export_config', {}, function(d){ smState.raw=d; smTab('raw') }) }
+function smTestMatch() { var uri = prompt('URI to test', '/.env'); if (uri) smPost('test_match', {uri:uri,user_agent:'manual-test'}, function(d){ smState.raw=d; smTab('raw') }) }
 smOverview()
 </script>
