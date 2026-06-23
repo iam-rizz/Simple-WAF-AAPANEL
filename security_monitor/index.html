@@ -483,6 +483,7 @@ function smRenderSettings(d){
     +'<div class="wfl-lbl">Log paths</div><div class="wfv"><textarea id="set_log_paths" class="wsearch" style="width:100%;height:86px;line-height:18px;padding:8px">'+textList(d.log_paths)+'</textarea><div class="wmuted">One glob per line. Example: /www/wwwlogs/*.log</div></div>'
     +'<div class="wfl-lbl">IP whitelist</div><div class="wfv"><textarea id="set_whitelist_ips" class="wsearch" style="width:100%;height:76px;line-height:18px;padding:8px">'+textList(d.whitelist_ips)+'</textarea></div>'
     +'<div class="wfl-lbl">Path whitelist</div><div class="wfv"><textarea id="set_whitelist_paths" class="wsearch" style="width:100%;height:76px;line-height:18px;padding:8px">'+textList(d.whitelist_paths)+'</textarea></div>'
+    +'<div class="wfl-lbl">User-Agent whitelist</div><div class="wfv"><textarea id="set_whitelist_user_agents" class="wsearch" style="width:100%;height:76px;line-height:18px;padding:8px">'+textList(d.whitelist_user_agents)+'</textarea><div class="wmuted">One text match per line. Example: RizzSystem will whitelist any User-Agent containing RizzSystem.</div></div>'
     +'</div></div>';
   document.getElementById('set_firewall_backend').value=d.firewall_backend||'auto';
 }
@@ -498,7 +499,8 @@ function smSaveSettings(){
     scan_limit_lines:parseInt(document.getElementById('set_scan_limit_lines').value||'5000'),
     log_paths:smLines('set_log_paths'),
     whitelist_ips:smLines('set_whitelist_ips'),
-    whitelist_paths:smLines('set_whitelist_paths')
+    whitelist_paths:smLines('set_whitelist_paths'),
+    whitelist_user_agents:smLines('set_whitelist_user_agents')
   };
   smPost('save_settings',{settings:JSON.stringify(settings)},function(d){S.raw={status:true,msg:d};smNotice('Settings saved',true);smSettings();});
 }

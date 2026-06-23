@@ -27,6 +27,7 @@ DEFAULT_SETTINGS = {
     'waf_enabled': False,
     'whitelist_ips': ['127.0.0.1', '::1'],
     'whitelist_paths': [],
+    'whitelist_user_agents': [],
     'private_ip_whitelist': True,
     'firewall_backend': 'auto'
 }
@@ -274,7 +275,10 @@ def is_whitelisted(event, settings):
         pass
     if ip in settings.get('whitelist_ips', []):
         return True
-    return any(event['uri'].startswith(p) for p in settings.get('whitelist_paths', []))
+    if any(event['uri'].startswith(p) for p in settings.get('whitelist_paths', [])):
+        return True
+    user_agent = event.get('user_agent', '').lower()
+    return any(pattern.lower() in user_agent for pattern in settings.get('whitelist_user_agents', []) if pattern)
 
 def match_rules(event, rules):
     target = event['uri'] + ' ' + event.get('user_agent', '')

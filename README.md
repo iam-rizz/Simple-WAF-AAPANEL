@@ -2,7 +2,7 @@
 
 Simple WAF aaPanel is an aaPanel plugin for monitoring suspicious web requests from webserver logs and preparing IP bans with safe dry-run defaults.
 
-Current version: `0.3.0`
+Current version: `0.3.1`
 
 ## Features
 
@@ -28,7 +28,7 @@ Current version: `0.3.0`
   - `ufw`
   - `firewalld`
   - `iptables`
-- Whitelist IP/path support
+- Whitelist IP/path/User-Agent support
 - Auto-unban by expiry timestamp
 - Nginx WAF rule generator
 - Safe defaults:
@@ -144,7 +144,7 @@ dist/security_monitor.zip
 - **Interception**: detected suspicious requests from logs
 - **Rules**: detection rules, severity, threshold, ban duration
 - **Blockade**: dry-run or active ban records
-- **Global**: runtime configuration
+- **Global**: runtime configuration, ban time, firewall backend, log paths, IP/path/User-Agent whitelist
 - **Logs**: last operation result in table format, with full-size JSON view button
 
 The **Logs** page is not raw webserver logs. It shows the latest plugin operation/API result. Actual detected requests are shown in **Interception**.
@@ -194,7 +194,8 @@ python3 -m unittest discover -s tests -v
   "auto_ban": false,
   "default_ban_seconds": 3600,
   "waf_enabled": false,
-  "firewall_backend": "auto"
+  "firewall_backend": "auto",
+  "whitelist_user_agents": []
 }
 ```
 

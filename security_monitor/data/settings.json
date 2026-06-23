@@ -14,5 +14,6 @@
     "127.0.0.1",
     "::1"
   ],
-  "whitelist_paths": []
+  "whitelist_paths": [],
+  "whitelist_user_agents": []
 }

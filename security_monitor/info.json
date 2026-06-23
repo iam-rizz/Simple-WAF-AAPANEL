@@ -3,7 +3,7 @@
   "name": "security_monitor",
   "type": "Tools",
   "ps": "Monitor web attacks, alert risks, and ban IPs with dry-run safety.",
-  "versions": "0.3.0",
+  "versions": "0.3.1",
   "checks": "/www/server/panel/plugin/security_monitor/security_monitor_main.py",
   "author": "local",
   "home": "https://www.aapanel.com",
